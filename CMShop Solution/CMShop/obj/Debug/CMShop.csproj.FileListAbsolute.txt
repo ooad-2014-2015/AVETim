@@ -1,0 +1,13 @@
+C:\Users\Vejsil\Source\Workspaces\OurProject\CMShop\CMShop\bin\Debug\CMShop.exe.config
+C:\Users\Vejsil\Source\Workspaces\OurProject\CMShop\CMShop\bin\Debug\CMShop.exe
+C:\Users\Vejsil\Source\Workspaces\OurProject\CMShop\CMShop\bin\Debug\CMShop.pdb
+C:\Users\Vejsil\Source\Workspaces\OurProject\CMShop\CMShop\obj\Debug\CMShop.csprojResolveAssemblyReference.cache
+C:\Users\Vejsil\Source\Workspaces\OurProject\CMShop\CMShop\obj\Debug\Views\MainWindow.baml
+C:\Users\Vejsil\Source\Workspaces\OurProject\CMShop\CMShop\obj\Debug\Views\MainWindow.g.cs
+C:\Users\Vejsil\Source\Workspaces\OurProject\CMShop\CMShop\obj\Debug\App.g.cs
+C:\Users\Vejsil\Source\Workspaces\OurProject\CMShop\CMShop\obj\Debug\CMShop_MarkupCompile.cache
+C:\Users\Vejsil\Source\Workspaces\OurProject\CMShop\CMShop\obj\Debug\CMShop.g.resources
+C:\Users\Vejsil\Source\Workspaces\OurProject\CMShop\CMShop\obj\Debug\CMShop.Properties.Resources.resources
+C:\Users\Vejsil\Source\Workspaces\OurProject\CMShop\CMShop\obj\Debug\CMShop.csproj.GenerateResource.Cache
+C:\Users\Vejsil\Source\Workspaces\OurProject\CMShop\CMShop\obj\Debug\CMShop.exe
+C:\Users\Vejsil\Source\Workspaces\OurProject\CMShop\CMShop\obj\Debug\CMShop.pdb
