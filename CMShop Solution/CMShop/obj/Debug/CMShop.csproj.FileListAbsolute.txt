@@ -11,3 +11,20 @@ C:\Users\Vejsil\Source\Workspaces\OurProject\CMShop\CMShop\obj\Debug\CMShop.Prop
 C:\Users\Vejsil\Source\Workspaces\OurProject\CMShop\CMShop\obj\Debug\CMShop.csproj.GenerateResource.Cache
 C:\Users\Vejsil\Source\Workspaces\OurProject\CMShop\CMShop\obj\Debug\CMShop.exe
 C:\Users\Vejsil\Source\Workspaces\OurProject\CMShop\CMShop\obj\Debug\CMShop.pdb
+C:\Users\Hrustic\Documents\AVETim\CMShop Solution\CMShop\bin\Debug\CMShop.exe.config
+C:\Users\Hrustic\Documents\AVETim\CMShop Solution\CMShop\obj\Debug\CMShop.exe
+C:\Users\Hrustic\Documents\AVETim\CMShop Solution\CMShop\obj\Debug\CMShop.pdb
+C:\Users\Hrustic\Documents\AVETim\CMShop Solution\CMShop\bin\Debug\CMShop.exe
+C:\Users\Hrustic\Documents\AVETim\CMShop Solution\CMShop\bin\Debug\CMShop.pdb
+C:\Users\Hrustic\Documents\AVETim\CMShop Solution\CMShop\obj\Debug\CMShop.csprojResolveAssemblyReference.cache
+C:\Users\Hrustic\Documents\AVETim\CMShop Solution\CMShop\obj\Debug\Views\Pocetna.baml
+C:\Users\Hrustic\Documents\AVETim\CMShop Solution\CMShop\obj\Debug\Views\Pocetna.g.cs
+C:\Users\Hrustic\Documents\AVETim\CMShop Solution\CMShop\obj\Debug\App.g.cs
+C:\Users\Hrustic\Documents\AVETim\CMShop Solution\CMShop\obj\Debug\CMShop_MarkupCompile.cache
+C:\Users\Hrustic\Documents\AVETim\CMShop Solution\CMShop\obj\Debug\CMShop.g.resources
+C:\Users\Hrustic\Documents\AVETim\CMShop Solution\CMShop\obj\Debug\CMShop.Properties.Resources.resources
+C:\Users\Hrustic\Documents\AVETim\CMShop Solution\CMShop\obj\Debug\CMShop.csproj.GenerateResource.Cache
+C:\Users\Hrustic\Documents\AVETim\CMShop Solution\CMShop\bin\Debug\EntityFramework.dll
+C:\Users\Hrustic\Documents\AVETim\CMShop Solution\CMShop\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Hrustic\Documents\AVETim\CMShop Solution\CMShop\bin\Debug\EntityFramework.xml
+C:\Users\Hrustic\Documents\AVETim\CMShop Solution\CMShop\bin\Debug\EntityFramework.SqlServer.xml
