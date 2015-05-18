@@ -11,17 +11,18 @@ using CMeShop.Models;
 
 namespace CMeShop.Controllers
 {
-    public class ArtikalsController : Controller
+    [Authorize(Roles="Admin")]
+    public class ArtikliController : Controller
     {
         private ShopContext db = new ShopContext();
-       
-        // GET: Artikals
+
+        // GET: Artikli
         public ActionResult Index()
         {
             return View(db.Artikli.ToList());
         }
 
-        // GET: Artikals/Details/5
+        // GET: Artikli/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,13 +37,13 @@ namespace CMeShop.Controllers
             return View(artikal);
         }
 
-        // GET: Artikals/Create
+        // GET: Artikli/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Artikals/Create
+        // POST: Artikli/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -59,7 +60,7 @@ namespace CMeShop.Controllers
             return View(artikal);
         }
 
-        // GET: Artikals/Edit/5
+        // GET: Artikli/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -74,7 +75,7 @@ namespace CMeShop.Controllers
             return View(artikal);
         }
 
-        // POST: Artikals/Edit/5
+        // POST: Artikli/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -90,7 +91,7 @@ namespace CMeShop.Controllers
             return View(artikal);
         }
 
-        // GET: Artikals/Delete/5
+        // GET: Artikli/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -105,7 +106,7 @@ namespace CMeShop.Controllers
             return View(artikal);
         }
 
-        // POST: Artikals/Delete/5
+        // POST: Artikli/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

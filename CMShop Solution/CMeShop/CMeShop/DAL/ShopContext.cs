@@ -7,5 +7,6 @@ namespace CMeShop.DAL
     public class ShopContext : DbContext
     {
         public DbSet<Artikal> Artikli { get; set; }
+        public DbSet<Osoba> Korisnici { get; set; }
     }
 }

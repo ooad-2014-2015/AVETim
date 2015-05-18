@@ -159,7 +159,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ArtikalsController.cs" />
+    <Compile Include="Controllers\ArtikliController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DAL\ShopContext.cs" />
@@ -219,9 +219,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -243,11 +240,12 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Artikals\Create.cshtml" />
-    <Content Include="Views\Artikals\Delete.cshtml" />
-    <Content Include="Views\Artikals\Details.cshtml" />
-    <Content Include="Views\Artikals\Edit.cshtml" />
-    <Content Include="Views\Artikals\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Artikli\Create.cshtml" />
+    <Content Include="Views\Artikli\Delete.cshtml" />
+    <Content Include="Views\Artikli\Details.cshtml" />
+    <Content Include="Views\Artikli\Edit.cshtml" />
+    <Content Include="Views\Artikli\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
