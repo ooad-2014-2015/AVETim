@@ -105,6 +105,10 @@ C:\Users\Vejsil\Documents\GitHub\AVETim\CMShop Solution\CMeShop\CMeShop\bin\Micr
 C:\Users\Vejsil\Documents\GitHub\AVETim\CMShop Solution\CMeShop\CMeShop\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Vejsil\Documents\GitHub\AVETim\CMShop Solution\CMeShop\CMeShop\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Vejsil\Documents\GitHub\AVETim\CMShop Solution\CMeShop\CMeShop\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\Vejsil\Documents\GitHub\AVETim\CMShop Solution\CMeShop\CMeShop\obj\Debug\CMeShop.csprojResolveAssemblyReference.cache
 C:\Users\Vejsil\Documents\GitHub\AVETim\CMShop Solution\CMeShop\CMeShop\obj\Debug\CMeShop.dll
 C:\Users\Vejsil\Documents\GitHub\AVETim\CMShop Solution\CMeShop\CMeShop\obj\Debug\CMeShop.pdb
+C:\Users\Vejsil\Documents\GitHub\AVETim\CMShop Solution\CMeShop\CMeShop\bin\PagedList.dll
+C:\Users\Vejsil\Documents\GitHub\AVETim\CMShop Solution\CMeShop\CMeShop\bin\PagedList.Mvc.dll
+C:\Users\Vejsil\Documents\GitHub\AVETim\CMShop Solution\CMeShop\CMeShop\bin\PagedList.xml
+C:\Users\Vejsil\Documents\GitHub\AVETim\CMShop Solution\CMeShop\CMeShop\bin\PagedList.Mvc.xml
+C:\Users\Vejsil\Documents\GitHub\AVETim\CMShop Solution\CMeShop\CMeShop\obj\Debug\CMeShop.csprojResolveAssemblyReference.cache

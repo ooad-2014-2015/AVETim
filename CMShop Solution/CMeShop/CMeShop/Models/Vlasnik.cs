@@ -3,6 +3,7 @@ namespace CMeShop.Models
 {
     public class Vlasnik : Osoba
     {
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public StatistickiPrikaz statistickiPrikaz { get; set; }
         public override void prijava() { }
         public override void registracija() { }

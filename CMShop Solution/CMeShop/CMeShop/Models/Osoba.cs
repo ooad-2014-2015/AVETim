@@ -9,6 +9,7 @@ namespace CMeShop.Models
 {
     public abstract class Osoba 
     {
+        public int ID { get; set; }
         public string ImeIprezime { get; set; }
         public string brojTelefona { get; set; }
         public string adresa { get; set; }

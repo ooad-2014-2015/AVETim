@@ -11,7 +11,6 @@ using CMeShop.Models;
 
 namespace CMeShop.Controllers
 {
-    [Authorize(Roles="Admin")]
     public class ArtikliController : Controller
     {
         private ShopContext db = new ShopContext();

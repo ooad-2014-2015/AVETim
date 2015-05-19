@@ -8,5 +8,8 @@ namespace CMeShop.DAL
     {
         public DbSet<Artikal> Artikli { get; set; }
         public DbSet<Osoba> Korisnici { get; set; }
+        public DbSet<Kosarica> Kosarice { get; set; }
+        public DbSet<Narudzba> Narudzbe { get; set; }
+        public DbSet<StavkaNarudzbe> StavkeNarudzbi { get; set; }
     }
 }

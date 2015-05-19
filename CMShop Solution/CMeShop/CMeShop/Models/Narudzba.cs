@@ -10,10 +10,12 @@ namespace CMeShop.Models
     {
         public enum StatusNarudzbe
         { ODOBRENO, OTKAZANO };
-        public ICollection<StavkaNarudzbe> listaStavki { get; set; }
+        public int ID { get; set; }
+        public int KosaricaID { get; set; }
+        public virtual ICollection<StavkaNarudzbe> listaStavki { get; set; }
         public DateTime datumNarudzbe { get; set; }
-        public int brojNarudzbe { get; set; }
         public StatusNarudzbe statusNarudzbe { get; set; }
         public string nacinPlacanja { get; set; }
+        public bool finalizirano { get; set; }
     }
 }

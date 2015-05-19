@@ -8,11 +8,12 @@ namespace CMeShop.Models
 {
     public class StavkaNarudzbe
     {
-        public int narudzbaID { get; set; }
-        public int artikalID { get; set; }
-        public Artikal artikal { get; set; }
+        public int ID { get; set; }
+        public int ArtikalID { get; set; }
+        public int NarudzbaID { get; set; }
+        public virtual Artikal artikal { get; set; }
         public int kolicina { get; set; }
-        public Narudzba narudzba { get; set; }
+        public virtual Narudzba narudzba { get; set; }
         public void ukloniStavku() { }
         public void dodajStavku() { }
     }

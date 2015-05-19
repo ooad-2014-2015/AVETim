@@ -17,6 +17,20 @@ namespace CMeShop.DAL
             };
             artikli.ForEach(abc => context.Artikli.Add(abc));
             context.SaveChanges();
+            var vlasnik = new List<Vlasnik>
+            {
+                new Vlasnik{ userName="vhrustic", adresa ="Grbavicka 14C", brojTelefona = "45532525", ImeIprezime="Vejsil Hrustic", password="123", slika="nesto"}
+            };
+            vlasnik.ForEach(a => context.Korisnici.Add(a));
+            context.SaveChanges();
+            context.Kosarice.Add(new Kosarica {  ID=1});
+            context.SaveChanges();
+            var kupci = new List<Kupac>
+            {
+                new Kupac{ adresa="Cengic Vila", bankovniRacun="43141241242151225", brojCMkartice="12/RWQO42", brojTelefona="4214214", cmKartica=true, ImeIprezime="Imenko Prezimenko", userName="kupac", password="kupac", slika="gsgdssdg", KosaricaID=1}
+            };
+            kupci.ForEach(a => context.Korisnici.Add(a));
+            context.SaveChanges();
         }
     }
 }

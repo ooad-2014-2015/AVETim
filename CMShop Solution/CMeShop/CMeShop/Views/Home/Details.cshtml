@@ -1,0 +1,90 @@
+﻿@model CMeShop.Models.Artikal
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Artikal</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.naziv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.naziv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.slika)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.slika)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cijena)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cijena)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.proizvodjac)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.proizvodjac)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rokUpotrebe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rokUpotrebe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.zemljaPorijekla)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.zemljaPorijekla)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.zaliheStanje)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.zaliheStanje)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.opis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.opis)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.brojKupljenih)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.brojKupljenih)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
