@@ -1,0 +1,51 @@
+﻿@model PagedList.IPagedList<CMeShop.Models.Artikal>
+@using PagedList.Mvc;
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Proizvodi";
+}
+
+<h2>Početna</h2>
+@using (Html.BeginForm("Index", "Home", FormMethod.Get))
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Pretraži" />
+    </p>
+}
+<section class="mainContent">
+
+    <div class="productRow">
+        <!-- Each product row contains info of 3 elements -->
+        @foreach (var item in Model)
+        {
+            <article class="productInfo">
+                <!-- Each individual product description -->
+
+                <div><img alt="sample" src="http://townandcountryremovals.com/wp-content/uploads/2013/10/firefox-logo-200x200.png"></div>
+
+                <p class="price">@item.cijena</p>
+
+                <p class="productContent">@item.naziv </p>
+
+                <input type="button" name="button" value="Kupi" class="buyButton">
+
+            </article>
+        }
+
+    </div>
+
+</section>
+<style>
+    section.pager {
+    position: absolute;
+    bottom: -100px;
+}
+</style>
+  
+ <section class="pager">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))</section>
+    
