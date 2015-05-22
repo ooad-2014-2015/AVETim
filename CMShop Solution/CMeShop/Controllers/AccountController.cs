@@ -38,6 +38,7 @@ namespace CMeShop.Controllers
                 FormsAuthentication.SetAuthCookie(kupac.userName, false);
                 Session["username"] = kupac.userName;
                 Session["id"] = db.Korisnici.Where(x => x.userName == kupac.userName).First().ID;
+                Session["role"] = "Kupac";
                 return RedirectToAction("Index", "Home");
             }
         }

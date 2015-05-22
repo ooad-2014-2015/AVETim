@@ -16,7 +16,7 @@ namespace CMeShop.Models
         public string userName { get; set; }
         public string password { get; set; }
         public string slika { get; set; }
-        public abstract void prijava();
+        public abstract void prijava(object user);
         public abstract void registracija();
     }
 }

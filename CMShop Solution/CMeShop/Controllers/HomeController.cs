@@ -19,6 +19,7 @@ namespace CMeShop.Controllers
         // GET: Home
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
+            if (Session["id"] != null) return  View("Details");
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";

@@ -10,7 +10,7 @@ namespace CMeShop.Models
     {
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public ListaNarudzbi listaNarudzbi { get; set; }
-        public override void prijava() { }
+        public override void prijava(object user) { }
         public override void registracija() { }
         public void azurirajListu() { }
     }

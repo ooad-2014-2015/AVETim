@@ -5,7 +5,7 @@ namespace CMeShop.Models
     {
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public StatistickiPrikaz statistickiPrikaz { get; set; }
-        public override void prijava() { }
+        public override void prijava(object user) { }
         public override void registracija() { }
         public void pregledajStatistiku() { }
         public void zaposli() { }
