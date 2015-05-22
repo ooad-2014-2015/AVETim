@@ -1,0 +1,101 @@
+﻿@model CMeShop.Models.Kupac
+
+@{
+    ViewBag.Title = "Pregled računa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (ViewBag.ErrorPoruka != null) { @ViewBag.ErrorPoruka}
+else { 
+<h2>Pregled računa</h2>
+
+<div>
+    <h4>Kupac</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ImeIprezime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImeIprezime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.brojTelefona)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.brojTelefona)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.adresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.adresa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.userName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.userName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.slika)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.slika)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cmKartica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cmKartica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bankovniRacun)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bankovniRacun)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.brojCMkartice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.brojCMkartice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Kosarica.ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kosarica.ID)
+        </dd>
+
+    </dl>
+</div> 
+}
+<p>
+    @if(ViewBag.ErrorPoruka == null) {@Html.ActionLink("Edit", "Edit", new { id = Model.ID }) }
+    @Html.ActionLink("Početna", "Index", "Home")
+</p>

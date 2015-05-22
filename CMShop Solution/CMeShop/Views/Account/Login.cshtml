@@ -6,6 +6,7 @@
 }
 
 <h2>Prijava na sistem</h2>
+@if (Request.IsAuthenticated) { <h3>Autenticiran!!</h3>}
 
 @using (Html.BeginForm("Login", "Account", FormMethod.Post)) 
 {

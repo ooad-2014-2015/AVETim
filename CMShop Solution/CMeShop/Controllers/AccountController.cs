@@ -19,6 +19,7 @@ namespace CMeShop.Controllers
 
         public ActionResult Login()
         {
+            if (Session["username"] != null) return RedirectToAction("Index", "Home");
             return View();
         }
         
@@ -35,9 +36,30 @@ namespace CMeShop.Controllers
             else
             {
                 FormsAuthentication.SetAuthCookie(kupac.userName, false);
+                Session["username"] = kupac.userName;
+                Session["id"] = db.Korisnici.Where(x => x.userName == kupac.userName).First().ID;
                 return RedirectToAction("Index", "Home");
             }
+        }
+        public ActionResult Details()
+        {
+            if(Session["id"] != null)
+            {
+                ShopContext db = new ShopContext();
+                Kupac kupac = (Kupac)db.Korisnici.Find(Session["id"]);
+                return View(kupac);
+            }
+            else
+            {
+                ViewBag.ErrorPoruka = "Niste logovani. Molimo vas da se prijavite kako bi ste mogli pristupiti vašem računu.";
+                return View();
+            }
 
+        }
+        public ActionResult Logout()
+        {
+            Session.RemoveAll();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

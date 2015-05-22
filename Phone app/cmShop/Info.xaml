@@ -1,0 +1,55 @@
+﻿<phone:PhoneApplicationPage x:Class="cmShop.Info"
+                            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                            xmlns:maps="clr-namespace:Microsoft.Phone.Maps.Controls;assembly=Microsoft.Phone.Maps"
+                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                            xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+                            xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+                            xmlns:toolkit="clr-namespace:Microsoft.Phone.Maps.Toolkit;assembly=Microsoft.Phone.Controls.Toolkit"
+                            FontFamily="{StaticResource PhoneFontFamilyNormal}"
+                            FontSize="{StaticResource PhoneFontSizeNormal}"
+                            Foreground="{StaticResource PhoneForegroundBrush}"
+                            Orientation="Portrait"
+                            SupportedOrientations="Portrait"
+                            shell:SystemTray.IsVisible="True"
+                            mc:Ignorable="d">
+
+    <Grid x:Name="LayoutRoot">
+        <Grid.Background>
+            <ImageBrush ImageSource="/Resources/pozadina2.jpg" Stretch="UniformToFill" />
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--  TitlePanel contains the name of the application and page title  -->
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Style="{StaticResource PhoneTextNormalStyle}" Text="KONTAKT INFORMACIJE" />
+        </StackPanel>
+
+        <!--  ContentPanel - place additional content here  -->
+        <Grid x:Name="ContentPanel"
+              Grid.Row="1"
+              Margin="10,0,14,0">
+            <TextBlock Margin="10,10,14,-10"
+                       Style="{StaticResource PhoneTextNormalStyle}"
+                       Text="Mozete nas pronaci na adresi: " />
+            <TextBlock Margin="90,50,-10,-10"
+                       Style="{StaticResource PhoneTextTitle2Style}"
+                       Text="ul. Marsala Tita 46" />
+            <maps:Map x:Name="mapa"
+                      Width="456"
+                      Height="557"
+                      Margin="0,110,0,0"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      Center="43.8587658,18.4195393"
+                      LandmarksEnabled="true"
+                      PedestrianFeaturesEnabled="true"
+                      ZoomLevel="17" />
+        </Grid>
+    </Grid>
+
+</phone:PhoneApplicationPage>
