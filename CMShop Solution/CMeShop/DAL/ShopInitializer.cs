@@ -19,7 +19,7 @@ namespace CMeShop.DAL
             context.SaveChanges();
             var vlasnik = new List<Vlasnik>
             {
-                new Vlasnik{ userName="vhrustic", adresa ="Grbavicka 14C", brojTelefona = "45532525", ImeIprezime="Vejsil Hrustic", password="123", slika="nesto"}
+                new Vlasnik{ role="Vlasnik", userName="vlasnik", adresa ="Grbavicka 14C", brojTelefona = "45532525", ImeIprezime="Vejsil Hrustic", password="vlasnik", slika="nesto"}
             };
             vlasnik.ForEach(a => context.Korisnici.Add(a));
             context.SaveChanges();
@@ -27,9 +27,11 @@ namespace CMeShop.DAL
             context.SaveChanges();
             var kupci = new List<Kupac>
             {
-                new Kupac{ adresa="Cengic Vila", bankovniRacun="43141241242151225", brojCMkartice="12/RWQO42", brojTelefona="4214214", cmKartica=true, ImeIprezime="Imenko Prezimenko", userName="kupac", password="kupac", slika="gsgdssdg", KosaricaID=1}
+                new Kupac{ role="Kupac", adresa="Cengic Vila", bankovniRacun="43141241242151225", brojCMkartice="12/RWQO42", brojTelefona="4214214", cmKartica=true, ImeIprezime="Imenko Prezimenko", userName="kupac", password="kupac", slika="gsgdssdg", KosaricaID=1}
             };
             kupci.ForEach(a => context.Korisnici.Add(a));
+            context.Korisnici.Add(new Dostavljac { brojTelefona = "42121412412", adresa = "Vitez BB", ImeIprezime = "Dostavljac Dostavko", userName = "dostavljac", password = "dostavljac", slika = "3214124124", role = "Dostavljac" });
+            context.Korisnici.Add(new Dobavljac { adresa = "Travnicka 43", brojTelefona = "321321312", ImeIprezime = "Dobavni Bavko", password = "dobavljac", userName = "dobavljac", role = "Dobavljac", slika = "21qeweqwedsa" });
             context.SaveChanges();
         }
     }

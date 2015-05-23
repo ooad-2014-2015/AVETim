@@ -1,37 +1,24 @@
-﻿@model CMeShop.Models.Kupac
+﻿@model CMeShop.Models.Vlasnik
 
 @{
-    ViewBag.Title = "Kupac - Prijava";
+    ViewBag.Title = "Vlasnik - Prijava";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Prijava na sistem</h2>
+<h2>Prijava vlasnika na sistem</h2>
 <h3>@ViewBag.Poruka</h3>
-@if (ViewBag.ErrorModel != null)
+@if(ViewBag.ErrorModel == "NotVlasnik")
 {
-    switch((string)ViewBag.ErrorModel)
-    {
-        case "Vlasnik":
-        <text><h5>Ovdje se mogu prijaviti samo registrovani kupci. Ukoliko se zelite prijaviti kao Vlasnik/Admin to možete učiniti @Html.ActionLink("OVDJE", "Login", "Vlasnik")</h5></text>
-            break;
-        case "Dostavljac":
-        <text><h5>Ovdje se mogu prijaviti samo registrovani kupci. Ukoliko se zelite prijaviti kao Dostavljać to možete učiniti @Html.ActionLink("OVDJE", "Login", "Dostavljac")</h5></text>
-            break;
-        default:
-        <text><h5>Ovdje se mogu prijaviti samo registrovani kupci. Ukoliko se zelite prijaviti kao Dostavljać to možete učiniti @Html.ActionLink("OVDJE", "Login", "Dobavljac")</h5></text>
-            break;
-    }
+    <h5>Na ovoj stranici se može prijaviti ako ste vlasnik. Kliknite @Html.ActionLink("OVDJE", "Index", "Home") za povratak na početnu stranicu.</h5>
 }
-
-
-@using (Html.BeginForm("Login", "Account", FormMethod.Post))
+@using (Html.BeginForm("Login", "Vlasnik", FormMethod.Post)) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
+        <h4>Vlasnik</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-       
         <div class="form-group">
             @Html.LabelFor(model => model.userName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -47,7 +34,6 @@
                 @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Prijava" class="btn btn-default" />
@@ -55,6 +41,7 @@
         </div>
     </div>
 }
+
 <div>
     @Html.ActionLink("Početna", "Index", "Home")
 </div>

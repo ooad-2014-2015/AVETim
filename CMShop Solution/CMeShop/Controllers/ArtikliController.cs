@@ -18,8 +18,7 @@ namespace CMeShop.Controllers
         // GET: Artikli
         public ActionResult Index()
         {
-            return View("Error");
-            //return View(db.Artikli.ToList());
+            return View(db.Artikli.ToList());
         }
 
         // GET: Artikli/Details/5

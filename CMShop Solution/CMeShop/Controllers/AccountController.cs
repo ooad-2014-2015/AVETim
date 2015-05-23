@@ -11,6 +11,7 @@ namespace CMeShop.Controllers
 {
     public class AccountController : Controller
     {
+        private ShopContext db = new ShopContext();
         // GET: Account
         public ActionResult Register()
         {
@@ -22,31 +23,33 @@ namespace CMeShop.Controllers
             if (Session["username"] != null) return RedirectToAction("Index", "Home");
             return View();
         }
-        
+
         [HttpPost]
         public ActionResult Login(Kupac kupac)
         {
-            ShopContext db = new ShopContext();
             var count = db.Korisnici.Where(x => x.userName == kupac.userName && x.password == kupac.password).Count();
-            if(count == 0)
+            if (count == 0)
             {
-                ViewBag.Poruka = "Nepostojeći korisnik";
+                ViewBag.Poruka = "Podaci za prijavu su netačni. Molimo Vas provjerite vaše korisničko ime i lozinku.";
                 return View();
             }
             else
             {
+                var userFromDb = db.Korisnici.Where(x => x.userName == kupac.userName).First();
+                if (userFromDb.role == "Vlasnik") { ViewBag.ErrorModel = "Vlasnik" ; return View(); }
+                else if (userFromDb.role == "Dostavljac") { ViewBag.ErrorModel = "Ovdje se mogu prijaviti samo registrovani kupci. Ukoliko se zelite prijaviti kao Dostavljač to možete učiniti "; return View(); }
+                else if (userFromDb.role == "Dobavljac") { ViewBag.ErrorModel = "Ovdje se mogu prijaviti samo registrovani kupci. Ukoliko se zelite prijaviti kao Dobavljač to možete učiniti "; return View(); }
                 FormsAuthentication.SetAuthCookie(kupac.userName, false);
-                Session["username"] = kupac.userName;
-                Session["id"] = db.Korisnici.Where(x => x.userName == kupac.userName).First().ID;
-                Session["role"] = "Kupac";
+                Session["username"] = userFromDb.userName;
+                Session["id"] = userFromDb.ID;
+                Session["role"] = userFromDb.role;
                 return RedirectToAction("Index", "Home");
             }
         }
         public ActionResult Details()
         {
-            if(Session["id"] != null)
+            if (Session["id"] != null)
             {
-                ShopContext db = new ShopContext();
                 Kupac kupac = (Kupac)db.Korisnici.Find(Session["id"]);
                 return View(kupac);
             }
@@ -61,6 +64,14 @@ namespace CMeShop.Controllers
         {
             Session.RemoveAll();
             return RedirectToAction("Index", "Home");
+        }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

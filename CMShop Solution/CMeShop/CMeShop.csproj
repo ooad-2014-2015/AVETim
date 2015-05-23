@@ -164,8 +164,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArtikliController.cs" />
+    <Compile Include="Controllers\DostavljacController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KorisniciController.cs" />
+    <Compile Include="Controllers\VlasnikController.cs" />
     <Compile Include="DAL\ShopContext.cs" />
     <Compile Include="DAL\ShopInitializer.cs" />
     <Compile Include="Global.asax.cs">
@@ -248,6 +250,16 @@
     <Content Include="Views\Artikli\Error.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Views\Account\Dummy.cshtml" />
+    <Content Include="Views\Vlasnik\Login.cshtml" />
+    <Content Include="Views\Vlasnik\Delete.cshtml" />
+    <Content Include="Views\Vlasnik\Details.cshtml" />
+    <Content Include="Views\Vlasnik\Edit.cshtml" />
+    <Content Include="Views\Vlasnik\Index.cshtml" />
+    <Content Include="Views\Dostavljac\Login.cshtml" />
+    <Content Include="Views\Dostavljac\Delete.cshtml" />
+    <Content Include="Views\Dostavljac\Details.cshtml" />
+    <Content Include="Views\Dostavljac\Edit.cshtml" />
+    <Content Include="Views\Dostavljac\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
