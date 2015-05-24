@@ -164,6 +164,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArtikliController.cs" />
+    <Compile Include="Controllers\DobavljacController.cs" />
     <Compile Include="Controllers\DostavljacController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KorisniciController.cs" />
@@ -260,6 +261,10 @@
     <Content Include="Views\Dostavljac\Details.cshtml" />
     <Content Include="Views\Dostavljac\Edit.cshtml" />
     <Content Include="Views\Dostavljac\Index.cshtml" />
+    <Content Include="Views\Dobavljac\Login.cshtml" />
+    <Content Include="Views\Dobavljac\Delete.cshtml" />
+    <Content Include="Views\Dobavljac\Details.cshtml" />
+    <Content Include="Views\Dobavljac\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

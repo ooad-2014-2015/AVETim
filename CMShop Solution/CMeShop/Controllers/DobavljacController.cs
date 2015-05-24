@@ -12,7 +12,7 @@ using System.Web.Security;
 
 namespace CMeShop.Controllers
 {
-    public class DostavljacController : Controller
+    public class DobavljacController : Controller
     {
         private ShopContext db = new ShopContext();
 
@@ -23,9 +23,9 @@ namespace CMeShop.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(Dostavljac dostavljac)
+        public ActionResult Login(Dobavljac dobavljac)
         {
-            var count = db.Korisnici.Where(x => x.userName == dostavljac.userName && x.password == dostavljac.password).Count();
+            var count = db.Korisnici.Where(x => x.userName == dobavljac.userName && x.password == dobavljac.password).Count();
             if (count == 0)
             {
                 ViewBag.Poruka = "Podaci za prijavu su netačni. Molimo Vas provjerite vaše korisničko ime i lozinku.";
@@ -33,9 +33,9 @@ namespace CMeShop.Controllers
             }
             else
             {
-                var userFromDb = db.Korisnici.Where(x => x.userName == dostavljac.userName).First();
-                if (userFromDb.role != "Dostavljac") { ViewBag.ErrorModel = "NotDostavljac"; return View(); }
-                FormsAuthentication.SetAuthCookie(dostavljac.userName, false);
+                var userFromDb = db.Korisnici.Where(x => x.userName == dobavljac.userName).First();
+                if (userFromDb.role != "Dostavljac") { ViewBag.ErrorModel = "NotDobavljac"; return View(); }
+                FormsAuthentication.SetAuthCookie(dobavljac.userName, false);
                 Session["username"] = userFromDb.userName;
                 Session["id"] = userFromDb.ID;
                 Session["role"] = userFromDb.role;
@@ -46,8 +46,8 @@ namespace CMeShop.Controllers
         {
             if (Session["id"] != null)
             {
-                Dostavljac dostavljac = (Dostavljac)db.Korisnici.Find(Session["id"]);
-                return View(dostavljac);
+                Dobavljac dobavljac = (Dobavljac)db.Korisnici.Find(Session["id"]);
+                return View(dobavljac);
             }
             else
             {

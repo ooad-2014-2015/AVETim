@@ -11,5 +11,10 @@ namespace CMeShop.DAL
         public DbSet<Kosarica> Kosarice { get; set; }
         public DbSet<Narudzba> Narudzbe { get; set; }
         public DbSet<StavkaNarudzbe> StavkeNarudzbi { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+        }
     }
 }
