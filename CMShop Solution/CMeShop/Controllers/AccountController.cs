@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Threading;
 
 namespace CMeShop.Controllers
 {
@@ -48,22 +49,30 @@ namespace CMeShop.Controllers
         }
         public ActionResult Details()
         {
-            if (Session["id"] != null)
-            {
-                Kupac kupac = (Kupac)db.Korisnici.Find(Session["id"]);
-                return View(kupac);
-            }
-            else
-            {
-                ViewBag.ErrorPoruka = "Niste logovani. Molimo vas da se prijavite kako bi ste mogli pristupiti vašem računu.";
-                return View();
-            }
-
+            Kupac kupac = null;
+            Thread mojThread = new Thread(() => prikupiDetalje(out kupac));
+            mojThread.Start();
+            while (!mojThread.IsAlive) ;
+            mojThread.Join();
+            if (kupac != null) return View(kupac);
+            return View();
         }
         public ActionResult Logout()
         {
             Session.RemoveAll();
             return RedirectToAction("Index", "Home");
+        }
+        public void prikupiDetalje(out Kupac kupac)
+        {
+            if (Session["id"] != null)
+            {
+                kupac = (Kupac)db.Korisnici.Find(Session["id"]);
+            }
+            else
+            {
+                kupac = null;
+                ViewBag.ErrorPoruka = "Niste logovani. Molimo vas da se prijavite kako bi ste mogli pristupiti vašem računu.";
+            }
         }
         protected override void Dispose(bool disposing)
         {
