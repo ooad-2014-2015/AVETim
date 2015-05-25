@@ -25,7 +25,7 @@ namespace CMeShop.Controllers
             var listaStavki = (List<StavkaKosarice>)Session["StavkeKosarice"];
             listaStavki.Add(new StavkaKosarice { ArtikalID = id, kolicina = 1, KosaricaID = ((Kupac)db.Korisnici.Find(Session["id"])).KosaricaID });
             Session["StavkeKosarice"] = listaStavki;
-            ViewBag.Poruka = "Uspješno ste dodali artikal " + db.Artikli.Find((<))
+            //ViewBag.Poruka = "Uspješno ste dodali artikal " + db.Artikli.Find((<))
             return View();
         }
         public ActionResult Finish()
