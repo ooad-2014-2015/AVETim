@@ -15,6 +15,6 @@ namespace CMeShop.Models
     {
         [Key]
         public int ID { get; set; }
-        public virtual ICollection<Narudzba> Narudzbe { get; set; }
+        public virtual ICollection<StavkaKosarice> Stavke { get; set; }
     }
 }

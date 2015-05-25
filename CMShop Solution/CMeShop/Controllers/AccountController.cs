@@ -6,16 +6,26 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Threading;
 
 namespace CMeShop.Controllers
 {
     public class AccountController : Controller
     {
         private ShopContext db = new ShopContext();
-        // GET: Account
         public ActionResult Register()
         {
             return View();
+        }
+        [HttpPost]
+        public ActionResult Register(Kupac kupac)
+        {
+            var count = db.Korisnici.Where(x => x.userName == kupac.userName).Count();
+            if (count > 0) { ViewBag.Poruka = "Već postoji registrovan kupac sa datim korisničkim imenom. Izaberite drugi username."; return View(); }
+            kupac.Kosarica = new Kosarica();
+            db.Korisnici.Add(kupac);
+            db.SaveChanges();
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Login()
@@ -43,27 +53,36 @@ namespace CMeShop.Controllers
                 Session["username"] = userFromDb.userName;
                 Session["id"] = userFromDb.ID;
                 Session["role"] = userFromDb.role;
+                Session["StavkeKosarice"] = new List<StavkaKosarice>();
                 return RedirectToAction("Index", "Home");
             }
         }
         public ActionResult Details()
         {
-            if (Session["id"] != null)
-            {
-                Kupac kupac = (Kupac)db.Korisnici.Find(Session["id"]);
-                return View(kupac);
-            }
-            else
-            {
-                ViewBag.ErrorPoruka = "Niste logovani. Molimo vas da se prijavite kako bi ste mogli pristupiti vašem računu.";
-                return View();
-            }
-
+            Kupac kupac = null;
+            Thread mojThread = new Thread(() => prikupiDetalje(out kupac));
+            mojThread.Start();
+            while (!mojThread.IsAlive) ;
+            mojThread.Join();
+            if (kupac != null) return View(kupac);
+            return View();
         }
         public ActionResult Logout()
         {
             Session.RemoveAll();
             return RedirectToAction("Index", "Home");
+        }
+        public void prikupiDetalje(out Kupac kupac)
+        {
+            if (Session["id"] != null)
+            {
+                kupac = (Kupac)db.Korisnici.Find(Session["id"]);
+            }
+            else
+            {
+                kupac = null;
+                ViewBag.ErrorPoruka = "Niste logovani. Molimo vas da se prijavite kako bi ste mogli pristupiti vašem računu.";
+            }
         }
         protected override void Dispose(bool disposing)
         {

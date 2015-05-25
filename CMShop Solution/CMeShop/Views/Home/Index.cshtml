@@ -5,7 +5,7 @@
 @{
     ViewBag.Title = "Proizvodi";
 }
-@using (Html.BeginForm("Index", "Home", FormMethod.Get))
+@using (Html.BeginForm())
 {
     <p>
         Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
@@ -21,13 +21,13 @@
             <article class="productInfo">
                 <!-- Each individual product description -->
 
-                <div><img alt="sample" src="http://townandcountryremovals.com/wp-content/uploads/2013/10/firefox-logo-200x200.png"></div>
+                <div><img alt="proizvod" src="http://townandcountryremovals.com/wp-content/uploads/2013/10/firefox-logo-200x200.png" height="190" width="190"></div>
 
                 <p class="price">@item.cijena</p>
 
                 <p class="productContent">@item.naziv </p>
 
-                <input type="button" name="button" value="Kupi" class="buyButton">
+                <input id=@item.ID onclick="location.href='@Url.Action("Details", "Home", new { id = item.ID })'" type="button" name="button" value="Kupi" class="buyButton">
 
             </article>
         }
