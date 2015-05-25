@@ -8,7 +8,7 @@ namespace CMeShop.Models
 {
     public class ListaNarudzbi
     {
-        public ICollection<Narudzba> listaNarudzbi { get; set; }
+        public ICollection<Kosarica> listaNarudzbi { get; set; }
         public void dodajNarudzbu() { }
     }
 }

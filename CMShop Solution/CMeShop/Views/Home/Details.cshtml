@@ -23,7 +23,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.slika)
+            <img src="@Url.Content("~/Content/Slike/karmin.png")" height="200" width="200" />
         </dd>
 
         <dt>
@@ -81,10 +81,10 @@
         <dd>
             @Html.DisplayFor(model => model.brojKupljenih)
         </dd>
-
     </dl>
+    <p><input onclick="location.href='@Url.Action("Dodaj", "Kosarica", new { id = Model.ID })'" type="button" name="button" value="Dodaj u korpu" class="buyButton"></p>
 </div>
+<p></p>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Početna", "Index")
 </p>

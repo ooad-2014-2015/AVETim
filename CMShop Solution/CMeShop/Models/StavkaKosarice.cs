@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace CMeShop.Models
 {
-    public class StavkaNarudzbe
+    public class StavkaKosarice
     {
         public int ID { get; set; }
         public int ArtikalID { get; set; }
-        public int NarudzbaID { get; set; }
+        public int KosaricaID { get; set; }
         public virtual Artikal artikal { get; set; }
         public int kolicina { get; set; }
-        public virtual Narudzba narudzba { get; set; }
+        public virtual Kosarica kosarica { get; set; }
         public void ukloniStavku() { }
         public void dodajStavku() { }
     }

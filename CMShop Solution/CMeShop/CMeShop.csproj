@@ -168,6 +168,7 @@
     <Compile Include="Controllers\DostavljacController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KorisniciController.cs" />
+    <Compile Include="Controllers\KosaricaController.cs" />
     <Compile Include="Controllers\VlasnikController.cs" />
     <Compile Include="DAL\ShopContext.cs" />
     <Compile Include="DAL\ShopInitializer.cs" />
@@ -185,11 +186,10 @@
     <Compile Include="Models\ListaNarudzbi.cs" />
     <Compile Include="Models\ListaZaliha.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Narudzba.cs" />
     <Compile Include="Models\Osoba.cs" />
     <Compile Include="Models\PreglednikProizvoda.cs" />
     <Compile Include="Models\StatistickiPrikaz.cs" />
-    <Compile Include="Models\StavkaNarudzbe.cs" />
+    <Compile Include="Models\StavkaKosarice.cs" />
     <Compile Include="Models\Vlasnik.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -198,6 +198,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\Slike\karmin.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -243,7 +244,6 @@
     <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Home\Edit.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Test.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
@@ -265,6 +265,12 @@
     <Content Include="Views\Dobavljac\Delete.cshtml" />
     <Content Include="Views\Dobavljac\Details.cshtml" />
     <Content Include="Views\Dobavljac\Edit.cshtml" />
+    <Content Include="Views\Kosarica\Create.cshtml" />
+    <Content Include="Views\Kosarica\Delete.cshtml" />
+    <Content Include="Views\Kosarica\Details.cshtml" />
+    <Content Include="Views\Kosarica\Edit.cshtml" />
+    <Content Include="Views\Kosarica\Index.cshtml" />
+    <Content Include="Views\Kosarica\Dodaj.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

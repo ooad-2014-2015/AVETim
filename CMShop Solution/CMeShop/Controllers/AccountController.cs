@@ -13,10 +13,19 @@ namespace CMeShop.Controllers
     public class AccountController : Controller
     {
         private ShopContext db = new ShopContext();
-        // GET: Account
         public ActionResult Register()
         {
             return View();
+        }
+        [HttpPost]
+        public ActionResult Register(Kupac kupac)
+        {
+            var count = db.Korisnici.Where(x => x.userName == kupac.userName).Count();
+            if (count > 0) { ViewBag.Poruka = "Već postoji registrovan kupac sa datim korisničkim imenom. Izaberite drugi username."; return View(); }
+            kupac.Kosarica = new Kosarica();
+            db.Korisnici.Add(kupac);
+            db.SaveChanges();
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Login()
