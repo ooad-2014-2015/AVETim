@@ -14,6 +14,7 @@ namespace CMeShop.Models
         public virtual Artikal artikal { get; set; }
         public int kolicina { get; set; }
         public virtual Kosarica kosarica { get; set; }
+        public bool isporuceno { get; set; }
         public decimal ukupnaCijena {
             get
             {

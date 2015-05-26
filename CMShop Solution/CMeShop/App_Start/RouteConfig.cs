@@ -13,11 +13,6 @@ namespace CMeShop
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.MapRoute(
-                "DodajUKosaricu",                                           // Route name
-                "Kosarica/{action}/{id}/{kol}",                            // URL with parameters
-                new { controller = "Kosarica", action = "Index" }  // Parameter defaults
-            );
-            routes.MapRoute(
                 "Kosarica",                                           // Route name
                 "Kosarica/{action}/{id}",                            // URL with parameters
                 new { controller = "Kosarica", action = "Index" }  // Parameter defaults

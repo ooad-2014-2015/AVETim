@@ -16,6 +16,11 @@ namespace CMeShop.Controllers
     {
         private ShopContext db = new ShopContext();
 
+        public ActionResult Index()
+        {
+            var stavke = db.StavkeKosarice.Include(a => a.artikal).Where(b => b.isporuceno==false);
+            return View(stavke.ToList());
+        }
         public ActionResult Login()
         {
             if (Session["username"] != null) return RedirectToAction("Index", "Home");

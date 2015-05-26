@@ -4,12 +4,9 @@
     ViewBag.Title = "Detalji artikla";
 }
 
-<script type="text/javascript">
-    var kolicina = document.getElementsByName("kolicina").valueOf();
-</script>
-
 <h2>Detalji proizvoda</h2>
-
+@using (Html.BeginForm("Test", "Kosarica", new { id = Model.ID }, FormMethod.Get))
+{
 <div>
     <h4>Artikal</h4>
     <hr />
@@ -88,14 +85,13 @@
         <dt>
             Količina:
         </dt>
-
+       
         <dd>
-            @Html.TextBox("kolicina")
-            <input type="number" id="kolicina" name="kolicina" />
+            @Html.TextBox("kolicina", "1")
         </dd> 
     </dl>
-    <p><input onclick="location.href='@Url.Action("Dodaj", "Kosarica", new { id = Model.ID, kol = "kolicina"})'" type="button" name="button" value="Dodaj u korpu" class="buyButton"></p>
-</div>
+    <p><input type="submit" onclick="location.href='@Url.Action("Dodaj", "Kosarica", new { id = Model.ID })'" name="button" value="Dodaj u korpu" class="buyButton"></p> 
+</div> }
 <p></p>
 <p>
     @Html.ActionLink("Početna", "Index")

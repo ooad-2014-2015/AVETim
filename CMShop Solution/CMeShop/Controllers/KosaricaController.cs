@@ -41,7 +41,7 @@ namespace CMeShop.Controllers
             }
             listaStavki.Add(new StavkaKosarice { ArtikalID = id.Value, kolicina = kol.Value, 
                 KosaricaID = ((Kupac)db.Korisnici.Find(Session["id"])).KosaricaID, 
-                artikal = (Artikal)db.Artikli.Find(id.Value) });
+                artikal = (Artikal)db.Artikli.Find(id.Value), isporuceno=false });
             Session["StavkeKosarice"] = listaStavki;
             ViewBag.Poruka = "Uspješno ste dodali " + kol.Value + " komada artikla " + db.Artikli.Find(id.Value).naziv + ".";
             return View();
@@ -53,11 +53,13 @@ namespace CMeShop.Controllers
             if (listaStavki.Count == 0) return RedirectToAction("Index", "Home");
             foreach (var item in listaStavki)
             {
-                db.StavkeKosarice.Add(item);
-                db.Artikli.Find(item.ID).zaliheStanje -= item.kolicina;
-                db.Artikli.Find(item.ID).brojKupljenih += item.kolicina;
+                using (var ctx = new ShopContext()) { 
+                ctx.StavkeKosarice.Add(item);
+                ctx.Artikli.Find(item.ArtikalID).zaliheStanje -= item.kolicina;
+                ctx.Artikli.Find(item.ArtikalID).brojKupljenih += item.kolicina;
+                ctx.SaveChanges();
+                }
             }
-            db.SaveChanges();
             ViewBag.Poruka = "Uspješno ste izvršili kupovinu u našoj online prodavnici. Pošiljka će vam uskoro biti isporučena na Vašu adresu.";
             return View();
         }

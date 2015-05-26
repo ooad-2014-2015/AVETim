@@ -55,44 +55,6 @@ namespace CMeShop.Controllers
             int pageNumber = (page ?? 1);
             return View(artikli.ToPagedList(pageNumber, pageSize));
         }
-        public ViewResult Test(string sortOrder, string currentFilter, string searchString, int? page)
-        {
-            ViewBag.CurrentSort = sortOrder;
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
-
-            if (searchString != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
-            }
-
-            ViewBag.CurrentFilter = searchString;
-
-            var artikli = from s in db.Artikli
-                          select s;
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                artikli = artikli.Where(s => s.naziv.Contains(searchString)
-                                       || s.opis.Contains(searchString));
-            }
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    artikli = artikli.OrderByDescending(s => s.naziv);
-                    break;
-                default:  // Name ascending 
-                    artikli = artikli.OrderBy(s => s.naziv);
-                    break;
-            }
-
-            int pageSize = 3;
-            int pageNumber = (page ?? 1);
-            return View(artikli.ToPagedList(pageNumber, pageSize));
-        }
 
 
         // GET: Home/Details/5

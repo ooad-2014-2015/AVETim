@@ -1,37 +1,25 @@
-﻿@model IEnumerable<CMeShop.Models.Dostavljac>
+﻿@model IEnumerable<CMeShop.Models.StavkaKosarice>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Lista proizvoda za isporuku</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ImeIprezime)
+            @Html.DisplayNameFor(model => model.artikal.naziv)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.brojTelefona)
+            @Html.DisplayNameFor(model => model.kosarica.ID)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.adresa)
+            @Html.DisplayNameFor(model => model.kolicina)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.userName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.password)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.slika)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.role)
+            @Html.DisplayNameFor(model => model.isporuceno)
         </th>
         <th></th>
     </tr>
@@ -39,25 +27,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.ImeIprezime)
+            @Html.DisplayFor(modelItem => item.artikal.naziv)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.brojTelefona)
+            @Html.DisplayFor(modelItem => item.kosarica.ID)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.adresa)
+            @Html.DisplayFor(modelItem => item.kolicina)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.userName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.slika)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.role)
+            @Html.DisplayFor(modelItem => item.isporuceno)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
