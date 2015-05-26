@@ -15,34 +15,61 @@ namespace CMeShop.Controllers
     {
         private ShopContext db = new ShopContext();
 
-        public ActionResult Dodaj(int id)
+        public ActionResult Dodaj(Nullable<int> id, Nullable<int> kol)
         {
-            if (!db.Artikli.Find(id).daLiJeDostupan())
+            if (Session["id"] == null)
+            {
+                ViewBag.Poruka = "Dodavanje artikala u košaricu mogu izvršiti samo registrovani kupci.";
+                return View();
+            }
+            if (id == null || id < 0 || kol <= 0 || kol == null)
+            {
+                ViewBag.Poruka = "Dogodila se greška. Neuspješno dodavanje artikla u košaricu.";
+                return View();
+            }
+            Artikal artikal = db.Artikli.Find(id.Value);
+            var listaStavki = (List<StavkaKosarice>)Session["StavkeKosarice"];
+            if (listaStavki.Exists(a => a.ArtikalID == id.Value))
+            {
+                ViewBag.Poruka = "Navedeni proizvod se već nalazi u vašoj košarici. Ako želite novu količinu, prvo uklonite proizvod iz vaše košarice.";
+                return View();
+            }
+            if (!artikal.daLiJeDostupan(kol.Value))
             {
                 ViewBag.Poruka = "Navedeni artikal trenutno nije na stanju. Ne možete ga dodati u Vašu košaricu.";
                 return View();
             }
-            var listaStavki = (List<StavkaKosarice>)Session["StavkeKosarice"];
-            listaStavki.Add(new StavkaKosarice { ArtikalID = id, kolicina = 1, KosaricaID = ((Kupac)db.Korisnici.Find(Session["id"])).KosaricaID });
+            listaStavki.Add(new StavkaKosarice { ArtikalID = id.Value, kolicina = kol.Value, 
+                KosaricaID = ((Kupac)db.Korisnici.Find(Session["id"])).KosaricaID, 
+                artikal = (Artikal)db.Artikli.Find(id.Value) });
             Session["StavkeKosarice"] = listaStavki;
-            //ViewBag.Poruka = "Uspješno ste dodali artikal " + db.Artikli.Find((<))
+            ViewBag.Poruka = "Uspješno ste dodali " + kol.Value + " komada artikla " + db.Artikli.Find(id.Value).naziv + ".";
             return View();
         }
         public ActionResult Finish()
         {
+            if(Session["StavkeKosarice"] == null) return RedirectToAction("Index", "Home");
             var listaStavki = (List<StavkaKosarice>)Session["StavkeKosarice"];
+            if (listaStavki.Count == 0) return RedirectToAction("Index", "Home");
             foreach (var item in listaStavki)
             {
                 db.StavkeKosarice.Add(item);
                 db.Artikli.Find(item.ID).zaliheStanje -= item.kolicina;
+                db.Artikli.Find(item.ID).brojKupljenih += item.kolicina;
             }
             db.SaveChanges();
-            return RedirectToAction("Index", "Home");
+            ViewBag.Poruka = "Uspješno ste izvršili kupovinu u našoj online prodavnici. Pošiljka će vam uskoro biti isporučena na Vašu adresu.";
+            return View();
         }
         // GET: Kosarica
         public ActionResult Index()
         {
-            return View(db.Kosarice.ToList());
+            if (Session["id"] == null && (string)Session["role"] != "Kupac")
+            {
+                ViewBag.ErrorModel = "Pregled košarice je omogućen samo prijavljenim kupcima.";
+                return View();
+            }
+            return View((List<StavkaKosarice>)Session["StavkeKosarice"]);
         }
 
         // GET: Kosarica/Details/5
@@ -60,73 +87,19 @@ namespace CMeShop.Controllers
             return View(kosarica);
         }
 
-        // GET: Kosarica/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Kosarica/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID")] Kosarica kosarica)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Kosarice.Add(kosarica);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(kosarica);
-        }
-
-        // GET: Kosarica/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Kosarica kosarica = db.Kosarice.Find(id);
-            if (kosarica == null)
-            {
-                return HttpNotFound();
-            }
-            return View(kosarica);
-        }
-
-        // POST: Kosarica/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID")] Kosarica kosarica)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(kosarica).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(kosarica);
-        }
-
         // GET: Kosarica/Delete/5
         public ActionResult Delete(int? id)
-        {
-            if (id == null)
+        {  //linq da bi se obezbjedilo da samo iz svoje košarice korisnik može ukloniti proizvod
+            if (id == null || (List<StavkaKosarice>)Session["StavkeKosarice"] == null || ((List<StavkaKosarice>)Session["StavkeKosarice"]).Where(a => a.ID == id.Value).Count() == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Kosarica kosarica = db.Kosarice.Find(id);
-            if (kosarica == null)
+            StavkaKosarice stavka = db.StavkeKosarice.Find(id);
+            if (stavka == null)
             {
                 return HttpNotFound();
             }
-            return View(kosarica);
+            return View(stavka);
         }
 
         // POST: Kosarica/Delete/5

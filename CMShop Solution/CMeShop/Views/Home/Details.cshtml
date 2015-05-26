@@ -1,10 +1,14 @@
 ﻿@model CMeShop.Models.Artikal
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalji artikla";
 }
 
-<h2>Details</h2>
+<script type="text/javascript">
+    var kolicina = document.getElementsByName("kolicina").valueOf();
+</script>
+
+<h2>Detalji proizvoda</h2>
 
 <div>
     <h4>Artikal</h4>
@@ -81,10 +85,19 @@
         <dd>
             @Html.DisplayFor(model => model.brojKupljenih)
         </dd>
+        <dt>
+            Količina:
+        </dt>
+
+        <dd>
+            @Html.TextBox("kolicina")
+            <input type="number" id="kolicina" name="kolicina" />
+        </dd> 
     </dl>
-    <p><input onclick="location.href='@Url.Action("Dodaj", "Kosarica", new { id = Model.ID })'" type="button" name="button" value="Dodaj u korpu" class="buyButton"></p>
+    <p><input onclick="location.href='@Url.Action("Dodaj", "Kosarica", new { id = Model.ID, kol = "kolicina"})'" type="button" name="button" value="Dodaj u korpu" class="buyButton"></p>
 </div>
 <p></p>
 <p>
     @Html.ActionLink("Početna", "Index")
 </p>
+

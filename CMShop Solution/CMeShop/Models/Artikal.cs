@@ -19,8 +19,8 @@ namespace CMeShop.Models
         public int zaliheStanje { get; set; }
         public string opis { get; set; }
         public int brojKupljenih { get; set; }
-        public bool daLiJeDostupan() {
-            if (zaliheStanje <= 0) return false;
+        public bool daLiJeDostupan(int _kolicina) {
+            if (zaliheStanje-_kolicina < 0) return false;
             return true;
         }
     }

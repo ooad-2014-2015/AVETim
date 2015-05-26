@@ -268,9 +268,9 @@
     <Content Include="Views\Kosarica\Create.cshtml" />
     <Content Include="Views\Kosarica\Delete.cshtml" />
     <Content Include="Views\Kosarica\Details.cshtml" />
-    <Content Include="Views\Kosarica\Edit.cshtml" />
     <Content Include="Views\Kosarica\Index.cshtml" />
     <Content Include="Views\Kosarica\Dodaj.cshtml" />
+    <Content Include="Views\Kosarica\Finish.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

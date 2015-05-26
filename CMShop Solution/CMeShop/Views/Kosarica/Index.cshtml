@@ -1,28 +1,52 @@
-﻿@model IEnumerable<CMeShop.Models.Kosarica>
+﻿@model List<CMeShop.Models.StavkaKosarice>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Moja Košarica";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<h2>Moja košarica</h2>
+@if(ViewBag.ErrorModel != null)
+{
+    <h5>@ViewBag.ErrorModel Kliknite @Html.ActionLink("OVDJE", "Index", "Home") za povratak na početnu stranicu.</h5>
+}
+else if (Model == null) { 
+   <h5>Vaša košarica je prazna. Dodavanje proizvoda u košaricu možete uraditi na @Html.ActionLink("Početnoj stranici", "Index", "Home").</h5>}
+else { 
 <table class="table">
     <tr>
+        <th>
+            Naziv proizvoda
+        </th>
+        <th>
+            Količina
+        </th>
+        <th>
+            Ukupna cijena
+        </th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
-
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.artikal.naziv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.kolicina)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ukupnaCijena)
+            </td>
+            <td>
+                @Html.ActionLink("Detalji", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Ukloni", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
 </table>
+using(Html.BeginForm("Finish", "Kosarica", FormMethod.Get))
+    {
+        <input type="button" name="Finish" class="buyButton" value="Završi kupovinu" onclick="location.href='@Url.Action("Finish", "Kosarica")'" />
+    }
+}

@@ -14,6 +14,12 @@ namespace CMeShop.Models
         public virtual Artikal artikal { get; set; }
         public int kolicina { get; set; }
         public virtual Kosarica kosarica { get; set; }
+        public decimal ukupnaCijena {
+            get
+            {
+                return artikal.cijena * kolicina;
+            }
+        }
         public void ukloniStavku() { }
         public void dodajStavku() { }
     }
