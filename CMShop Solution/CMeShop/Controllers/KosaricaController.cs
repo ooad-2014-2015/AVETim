@@ -64,19 +64,13 @@ namespace CMeShop.Controllers
                 using (var ctx = new ShopContext())
                 {
                     ctx.StavkeKosarice.Add(item);
+                    var artikal = ctx.Artikli.Find(item.ArtikalID);
+                    var kosarica = ctx.Kosarice.Find(item.KosaricaID);
+                    artikal.zaliheStanje -= item.kolicina;
+                    artikal.brojKupljenih += item.kolicina;
+                    ctx.Entry(kosarica).State = EntityState.Modified;
+                    ctx.Entry(artikal).State = System.Data.Entity.EntityState.Modified;
                     ctx.SaveChanges();
-                }
-                Artikal artikal = null;
-                using (var ctx = new ShopContext())
-                {
-                    artikal = ctx.Artikli.Where(a => a.ID == item.ArtikalID).First<Artikal>();
-                }
-                artikal.zaliheStanje -= item.kolicina;
-                artikal.brojKupljenih += item.kolicina;
-                using (var ct = new ShopContext())
-                {
-                    ct.Entry(artikal).State = System.Data.Entity.EntityState.Modified;
-                    ct.SaveChanges();
                 }
             }
             ViewBag.Poruka = "Uspješno ste izvršili kupovinu u našoj online prodavnici. Pošiljka će vam uskoro biti isporučena na Vašu adresu.";
