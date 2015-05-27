@@ -1,25 +1,34 @@
 ﻿@model IEnumerable<CMeShop.Models.StavkaKosarice>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Narudžbe za isporuku";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Lista proizvoda za isporuku</h2>
+<h2>Spisak neisporučenih narudžbi</h2>
 
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.artikal.naziv)
+            Naziv proizvoda
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.kosarica.ID)
+            Količina
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.kolicina)
+            Adresa Kupca
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.isporuceno)
+            Ime i prezime kupca
+        </th>
+        <th>
+            Način plaćanja
+        </th>
+        <th>
+            Datum i vrijeme kupovine
         </th>
         <th></th>
     </tr>
@@ -30,18 +39,22 @@
             @Html.DisplayFor(modelItem => item.artikal.naziv)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.kosarica.ID)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.kolicina)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.isporuceno)
+            @Html.DisplayFor(modelItem => item.adresa)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.DisplayFor(modelItem => item.imeKupca)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nacinPlacanja)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.datumKreiranja)
+        </td>
+        <td>
+            @Html.ActionLink("Označi isporučeno", "Edit", new { id=item.ID }) |
         </td>
     </tr>
 }

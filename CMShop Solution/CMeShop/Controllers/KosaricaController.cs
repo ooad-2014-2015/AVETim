@@ -48,6 +48,8 @@ namespace CMeShop.Controllers
                 KosaricaID = ((Kupac)db.Korisnici.Find(Session["id"])).KosaricaID,
                 kosarica = ((Kupac)db.Korisnici.Find(Session["id"])).Kosarica,
                 artikal = (Artikal)db.Artikli.Find(id.Value),
+                adresa = ((Kupac)db.Korisnici.Find(Session["id"])).adresa,
+                imeKupca = ((Kupac)db.Korisnici.Find(Session["id"])).ImeIprezime,
                 isporuceno = false
             });
             Session["StavkeKosarice"] = listaStavki;
@@ -63,6 +65,7 @@ namespace CMeShop.Controllers
             {
                 using (var ctx = new ShopContext())
                 {
+                    item.datumKreiranja = DateTime.Now;
                     ctx.StavkeKosarice.Add(item);
                     var artikal = ctx.Artikli.Find(item.ArtikalID);
                     var kosarica = ctx.Kosarice.Find(item.KosaricaID);
