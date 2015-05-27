@@ -41,21 +41,31 @@ namespace CMeShop.Controllers
                 ViewBag.Poruka = "Navedeni artikal trenutno nije na stanju. Ne možete ga dodati u Vašu košaricu.";
                 return View();
             }
-            listaStavki.Add(new StavkaKosarice { ArtikalID = id.Value, kolicina = kol.Value, 
-                KosaricaID = ((Kupac)db.Korisnici.Find(Session["id"])).KosaricaID, 
-                artikal = (Artikal)db.Artikli.Find(id.Value), isporuceno=false });
+            listaStavki.Add(new StavkaKosarice
+            {
+                ArtikalID = id.Value,
+                kolicina = kol.Value,
+                KosaricaID = ((Kupac)db.Korisnici.Find(Session["id"])).KosaricaID,
+                kosarica = ((Kupac)db.Korisnici.Find(Session["id"])).Kosarica,
+                artikal = (Artikal)db.Artikli.Find(id.Value),
+                isporuceno = false
+            });
             Session["StavkeKosarice"] = listaStavki;
-            ViewBag.Poruka = "Uspješno ste dodali " + kol.Value + " komada artikla " + db.Artikli.Find(id.Value).naziv + "." ;
+            ViewBag.Poruka = "Uspješno ste dodali " + kol.Value + " komada artikla " + db.Artikli.Find(id.Value).naziv + ".";
             return View();
         }
         public ActionResult Finish()
         {
-            if(Session["StavkeKosarice"] == null) return RedirectToAction("Index", "Home");
+            if (Session["StavkeKosarice"] == null) return RedirectToAction("Index", "Home");
             var listaStavki = (List<StavkaKosarice>)Session["StavkeKosarice"];
             if (listaStavki.Count == 0) return RedirectToAction("Index", "Home");
             foreach (var item in listaStavki)
             {
-                db.StavkeKosarice.Add(item);
+                using (var ctx = new ShopContext())
+                {
+                    ctx.StavkeKosarice.Add(item);
+                    ctx.SaveChanges();
+                }
                 Artikal artikal = null;
                 using (var ctx = new ShopContext())
                 {

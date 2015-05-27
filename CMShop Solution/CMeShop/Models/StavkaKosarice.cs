@@ -18,7 +18,7 @@ namespace CMeShop.Models
         public decimal ukupnaCijena {
             get
             {
-                return artikal.cijena * kolicina;
+                return  kolicina;
             }
         }
         public void ukloniStavku() { }
