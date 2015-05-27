@@ -193,6 +193,7 @@
     <Compile Include="Models\Vlasnik.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -221,12 +222,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
-    <Content Include="Views\Manage\ChangePassword.cshtml" />
-    <Content Include="Views\Manage\Index.cshtml" />
-    <Content Include="Views\Manage\ManageLogins.cshtml" />
-    <Content Include="Views\Manage\SetPassword.cshtml" />
-    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Artikli\Create.cshtml" />
@@ -246,21 +241,17 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Details.cshtml" />
     <Content Include="Views\Artikli\Error.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Views\Account\Dummy.cshtml" />
-    <Content Include="Views\Vlasnik\Login.cshtml" />
     <Content Include="Views\Vlasnik\Delete.cshtml" />
     <Content Include="Views\Vlasnik\Details.cshtml" />
     <Content Include="Views\Vlasnik\Edit.cshtml" />
     <Content Include="Views\Vlasnik\Index.cshtml" />
-    <Content Include="Views\Dostavljac\Login.cshtml" />
     <Content Include="Views\Dostavljac\Delete.cshtml" />
     <Content Include="Views\Dostavljac\Details.cshtml" />
     <Content Include="Views\Dostavljac\Edit.cshtml" />
-    <Content Include="Views\Dobavljac\Login.cshtml" />
     <Content Include="Views\Dobavljac\Delete.cshtml" />
     <Content Include="Views\Dobavljac\Details.cshtml" />
     <Content Include="Views\Dobavljac\Edit.cshtml" />
@@ -271,6 +262,7 @@
     <Content Include="Views\Kosarica\Dodaj.cshtml" />
     <Content Include="Views\Kosarica\Finish.cshtml" />
     <Content Include="Views\Dostavljac\Index.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

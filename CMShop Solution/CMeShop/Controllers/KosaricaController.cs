@@ -17,6 +17,8 @@ namespace CMeShop.Controllers
 
         public ActionResult Dodaj(Nullable<int> id, Nullable<int> kol)
         {
+            kol = Convert.ToInt32(this.Request.QueryString["kolicina"]);
+
             if (Session["id"] == null)
             {
                 ViewBag.Poruka = "Dodavanje artikala u košaricu mogu izvršiti samo registrovani kupci.";
@@ -43,7 +45,7 @@ namespace CMeShop.Controllers
                 KosaricaID = ((Kupac)db.Korisnici.Find(Session["id"])).KosaricaID, 
                 artikal = (Artikal)db.Artikli.Find(id.Value), isporuceno=false });
             Session["StavkeKosarice"] = listaStavki;
-            ViewBag.Poruka = "Uspješno ste dodali " + kol.Value + " komada artikla " + db.Artikli.Find(id.Value).naziv + ".";
+            ViewBag.Poruka = "Uspješno ste dodali " + kol.Value + " komada artikla " + db.Artikli.Find(id.Value).naziv + "." ;
             return View();
         }
         public ActionResult Finish()
@@ -53,14 +55,22 @@ namespace CMeShop.Controllers
             if (listaStavki.Count == 0) return RedirectToAction("Index", "Home");
             foreach (var item in listaStavki)
             {
-                using (var ctx = new ShopContext()) { 
-                ctx.StavkeKosarice.Add(item);
-                ctx.Artikli.Find(item.ArtikalID).zaliheStanje -= item.kolicina;
-                ctx.Artikli.Find(item.ArtikalID).brojKupljenih += item.kolicina;
-                ctx.SaveChanges();
+                db.StavkeKosarice.Add(item);
+                Artikal artikal = null;
+                using (var ctx = new ShopContext())
+                {
+                    artikal = ctx.Artikli.Where(a => a.ID == item.ArtikalID).First<Artikal>();
+                }
+                artikal.zaliheStanje -= item.kolicina;
+                artikal.brojKupljenih += item.kolicina;
+                using (var ct = new ShopContext())
+                {
+                    ct.Entry(artikal).State = System.Data.Entity.EntityState.Modified;
+                    ct.SaveChanges();
                 }
             }
             ViewBag.Poruka = "Uspješno ste izvršili kupovinu u našoj online prodavnici. Pošiljka će vam uskoro biti isporučena na Vašu adresu.";
+            Session["StavkeKosarice"] = new List<StavkaKosarice>(); //omogucava novu kupovinu
             return View();
         }
         // GET: Kosarica

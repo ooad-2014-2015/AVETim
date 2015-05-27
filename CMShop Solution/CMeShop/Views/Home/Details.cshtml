@@ -5,7 +5,7 @@
 }
 
 <h2>Detalji proizvoda</h2>
-@using (Html.BeginForm("Test", "Kosarica", new { id = Model.ID }, FormMethod.Get))
+@using (Html.BeginForm("Dodaj", "Kosarica", new { id = Model.ID }, FormMethod.Get))
 {
 <div>
     <h4>Artikal</h4>
@@ -87,10 +87,10 @@
         </dt>
        
         <dd>
-            @Html.TextBox("kolicina", "1")
+           <input type="number" name="kolicina" value="1" min="1" max="120" />
         </dd> 
     </dl>
-    <p><input type="submit" onclick="location.href='@Url.Action("Dodaj", "Kosarica", new { id = Model.ID })'" name="button" value="Dodaj u korpu" class="buyButton"></p> 
+    <p><input type="submit" onclick="location.href='@Url.Action("Dodaj", "Kosarica", new { id = Model.ID  })'" name="button" value="Dodaj u korpu" class="buyButton"></p> 
 </div> }
 <p></p>
 <p>

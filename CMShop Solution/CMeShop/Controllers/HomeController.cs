@@ -64,6 +64,9 @@ namespace CMeShop.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+           
+
             Artikal artikal = db.Artikli.Find(id);
             if (artikal == null)
             {

@@ -27,7 +27,30 @@ namespace CMeShop.Controllers
             db.SaveChanges();
             return RedirectToAction("Index", "Home");
         }
-
+        public ActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Login(CMeShop.ViewModels.LoginViewModel user)
+        {
+            var count = db.Korisnici.Where(x => x.userName == user.userName && x.password == user.password).Count();
+            if (count == 0)
+            {
+                ViewBag.Poruka = "Podaci za prijavu su netačni. Molimo Vas provjerite vaše korisničko ime i lozinku.";
+                return View();
+            }
+            else
+            {
+                var userFromDb = db.Korisnici.Where(x => x.userName == user.userName).First();
+                Session["username"] = userFromDb.userName;
+                Session["id"] = userFromDb.ID;
+                Session["role"] = userFromDb.role;
+                if (userFromDb.role == "Kupac") Session["StavkeKosarice"] = new List<CMeShop.Models.StavkaKosarice>();
+                return RedirectToAction("Index", "Home");
+            }
+        }
+/*
         public ActionResult Login()
         {
             if (Session["username"] != null) return RedirectToAction("Index", "Home");
@@ -56,7 +79,7 @@ namespace CMeShop.Controllers
                 Session["StavkeKosarice"] = new List<StavkaKosarice>();
                 return RedirectToAction("Index", "Home");
             }
-        }
+        }*/
         public ActionResult Details()
         {
             Kupac kupac = null;

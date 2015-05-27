@@ -1,59 +1,44 @@
-﻿@model CMeShop.Models.Kupac
+﻿@model CMeShop.ViewModels.LoginViewModel
 
 @{
-    ViewBag.Title = "Kupac - Prijava";
+    ViewBag.Title = "Prijava na stranicu";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Prijava na sistem</h2>
+<h2>Login</h2>
 <h3>@ViewBag.Poruka</h3>
-@if (ViewBag.ErrorModel != null)
-{
-    switch((string)ViewBag.ErrorModel)
-    {
-        case "Vlasnik":
-        <text><h5>Ovdje se mogu prijaviti samo registrovani kupci. Ukoliko se zelite prijaviti kao Vlasnik/Admin to možete učiniti @Html.ActionLink("OVDJE", "Login", "Vlasnik")</h5></text>
-            break;
-        case "Dostavljac":
-        <text><h5>Ovdje se mogu prijaviti samo registrovani kupci. Ukoliko se zelite prijaviti kao Dostavljać to možete učiniti @Html.ActionLink("OVDJE", "Login", "Dostavljac")</h5></text>
-            break;
-        default:
-        <text><h5>Ovdje se mogu prijaviti samo registrovani kupci. Ukoliko se zelite prijaviti kao Dostavljać to možete učiniti @Html.ActionLink("OVDJE", "Login", "Dobavljac")</h5></text>
-            break;
-    }
-}
-
-
-@using (Html.BeginForm("Login", "Account", FormMethod.Post))
+@using (Html.BeginForm("Login", "Account", FormMethod.Post)) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
+        <h4>Prijava korisnika</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-       
+ 
         <div class="form-group">
             @Html.LabelFor(model => model.userName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.userName, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.userName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.userName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                 @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.PasswordFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Prijava" class="btn btn-default" />
-            ></div>
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
         </div>
     </div>
 }
+
 <div>
-    @Html.ActionLink("Početna", "Index", "Home")
+    @Html.ActionLink("Početna stranica", "Index", "Home")
 </div>
