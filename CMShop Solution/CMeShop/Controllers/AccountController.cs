@@ -20,12 +20,16 @@ namespace CMeShop.Controllers
         [HttpPost]
         public ActionResult Register(Kupac kupac)
         {
-            var count = db.Korisnici.Where(x => x.userName == kupac.userName).Count();
-            if (count > 0) { ViewBag.Poruka = "Već postoji registrovan kupac sa datim korisničkim imenom. Izaberite drugi username."; return View(); }
-            kupac.Kosarica = new Kosarica();
-            db.Korisnici.Add(kupac);
-            db.SaveChanges();
-            return RedirectToAction("Index", "Home");
+            if (ModelState.IsValid)
+            {
+                var count = db.Korisnici.Where(x => x.userName == kupac.userName).Count();
+                if (count > 0) { ViewBag.Poruka = "Već postoji registrovan kupac sa datim korisničkim imenom. Izaberite drugi username."; return View(); }
+                kupac.Kosarica = new Kosarica();
+                db.Korisnici.Add(kupac);
+                db.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
         }
         public ActionResult Login()
         {
