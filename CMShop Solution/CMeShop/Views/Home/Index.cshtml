@@ -18,6 +18,7 @@
         <!-- Each product row contains info of 3 elements -->
         @foreach (var item in Model)
         {
+            for (int i = 0; i <= 3; i++) {
             <article class="productInfo">
                 <!-- Each individual product description -->
 
@@ -29,7 +30,7 @@
 
                 <input id=@item.ID onclick="location.href='@Url.Action("Details", "Home", new { id = item.ID })'" type="button" name="button" value="Kupi" class="buyButton">
 
-            </article>
+            </article> }
         }
 
     </div>
@@ -38,11 +39,13 @@
 <style>
     section.pager {
     position: absolute;
-    bottom: -100px;
+    bottom:-200px;
+    padding-bottom: 175px;
+    padding-left: 465px;
 }
 </style>
   
- <section class="pager">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+ <section class="pager">Stranica @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) od @Model.PageCount
 
 @Html.PagedListPager(Model, page => Url.Action("Index",
     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))</section>

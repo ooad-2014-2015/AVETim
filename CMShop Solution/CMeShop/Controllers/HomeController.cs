@@ -51,7 +51,7 @@ namespace CMeShop.Controllers
                     break;
             }
 
-            int pageSize = 3;
+            int pageSize = 12;
             int pageNumber = (page ?? 1);
             return View(artikli.ToPagedList(pageNumber, pageSize));
         }
