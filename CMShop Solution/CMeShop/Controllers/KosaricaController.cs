@@ -15,6 +15,27 @@ namespace CMeShop.Controllers
     {
         private ShopContext db = new ShopContext();
 
+        [HttpPost]
+        public ActionResult Zavrsi(Nullable<StavkaKosarice.NacinPlacanja> nacinPl)
+        {
+            List<StavkaKosarice> stavke = (List<StavkaKosarice>)Session["StavkeKosarice"];
+            if (stavke != null && stavke.Count > 0 && stavke[0].nacinPlacanja == StavkaKosarice.NacinPlacanja.NotSet)
+            {
+                foreach (var item in (List<StavkaKosarice>)Session["StavkeKosarice"])
+                {
+                    item.nacinPlacanja = nacinPl.Value;
+                }
+                return RedirectToAction("Finish", "Kosarica");
+            }
+            return View("~/Views/Shared/Error.cshtml");
+        }
+
+        public ActionResult Zavrsi()
+        {
+            ViewBag.Poruka = "Kako bi ste završili kupovinu, odaberite način plaćanja. U slučaju da posjedujete CM potrošačku karticu, bit će vam obračunat popust od 5%.";
+            return View();
+        }
+
         public ActionResult Dodaj(Nullable<int> id, Nullable<int> kol)
         {
             kol = Convert.ToInt32(this.Request.QueryString["kolicina"]);
@@ -50,13 +71,15 @@ namespace CMeShop.Controllers
                 artikal = (Artikal)db.Artikli.Find(id.Value),
                 adresa = ((Kupac)db.Korisnici.Find(Session["id"])).adresa,
                 imeKupca = ((Kupac)db.Korisnici.Find(Session["id"])).ImeIprezime,
+                UkupnaCijena = (decimal)(artikal.cijena*kol.Value),
+                nacinPlacanja = StavkaKosarice.NacinPlacanja.NotSet,
                 isporuceno = false
             });
             Session["StavkeKosarice"] = listaStavki;
             ViewBag.Poruka = "Uspješno ste dodali " + kol.Value + " komada artikla " + db.Artikli.Find(id.Value).naziv + ".";
             return View();
         }
-        public ActionResult Finish()
+        public ActionResult Finish() //konačni završetak narudzbe i finalizacija kupovine
         {
             if (Session["StavkeKosarice"] == null) return RedirectToAction("Index", "Home");
             var listaStavki = (List<StavkaKosarice>)Session["StavkeKosarice"];

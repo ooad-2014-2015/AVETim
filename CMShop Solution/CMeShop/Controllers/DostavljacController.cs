@@ -16,6 +16,25 @@ namespace CMeShop.Controllers
     {
         private ShopContext db = new ShopContext();
 
+        [HttpPost]
+        public ActionResult Index(List<StavkaKosarice> updateovaneStavke)
+        {
+            foreach(var item in updateovaneStavke)
+            {
+                if(item.isporuceno == true) //doslo je do izmjene
+                {
+                    var stavka = db.StavkeKosarice.Find(item.ID);
+                    stavka.isporuceno = true;
+                    db.Entry(stavka).State = EntityState.Modified;
+                    var kosarica = db.Kosarice.Find(item.KosaricaID);
+                    db.Entry(kosarica).State = EntityState.Modified;
+                    var artikal = db.Artikli.Find(item.ArtikalID);
+                    db.Entry(artikal).State = EntityState.Modified;
+                }
+            }
+            db.SaveChanges();
+            return RedirectToAction("Index", "Dostavljac");
+        }
         public ActionResult Index()
         {
             var stavke = db.StavkeKosarice.Include(a => a.artikal).Where(b => b.isporuceno==false);

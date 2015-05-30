@@ -10,7 +10,7 @@
 {
     <h5>@ViewBag.ErrorModel Kliknite @Html.ActionLink("OVDJE", "Index", "Home") za povratak na početnu stranicu.</h5>
 }
-else if (Model == null) { 
+else if (Model.Count == 0) { 
    <h5>Vaša košarica je prazna. Dodavanje proizvoda u košaricu možete uraditi na @Html.ActionLink("Početnoj stranici", "Index", "Home").</h5>}
 else { 
 <table class="table">
@@ -36,7 +36,7 @@ else {
                 @Html.DisplayFor(modelItem => item.kolicina)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ukupnaCijena)
+                @Html.DisplayFor(modelItem => item.UkupnaCijena)
             </td>
             <td>
                 @Html.ActionLink("Detalji", "Details", new { id = item.ID }) |

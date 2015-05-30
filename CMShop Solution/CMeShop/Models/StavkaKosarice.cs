@@ -9,7 +9,7 @@ namespace CMeShop.Models
     public class StavkaKosarice
     {
         public enum NacinPlacanja
-        { Karticom, Pouzecem };
+        { Karticom, Pouzecem, NotSet};
         public int ID { get; set; }
         public int ArtikalID { get; set; }
         public int KosaricaID { get; set; }
@@ -21,15 +21,10 @@ namespace CMeShop.Models
         public NacinPlacanja nacinPlacanja { get; set; }
         public DateTime datumKreiranja { get; set; }
         public bool isporuceno { get; set; }
-        public decimal ukupnaCijena {
-            get
-            {
-                return kolicina*artikal.cijena;
-            }
-        }
+        public decimal UkupnaCijena { get; set; }
         public decimal obracunajCijenuSaPopustom() //5% u slucaju da posjeduje potrosacku karticu
         {
-            return ukupnaCijena - ukupnaCijena * (decimal)0.5;
+            return UkupnaCijena - UkupnaCijena * (decimal)0.5;
         }
     }
 }

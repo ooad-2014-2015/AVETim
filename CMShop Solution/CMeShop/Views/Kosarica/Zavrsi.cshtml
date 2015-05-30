@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Način plaćanja";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Odabir načina plaćanja</h2>
+<h5>@ViewBag.Poruka</h5>
+@using(Html.BeginForm("Zavrsi", "Kosarica", FormMethod.Post))
+{
+    <label>@Html.RadioButton("nacinPl", "Karticom", true) Karticom</label>
+    <label>@Html.RadioButton("nacinPl", "Pouzecem", false) Pouzecem</label>
+    
+    <p></p>
+    <p><input type="submit" /></p>
+}
+

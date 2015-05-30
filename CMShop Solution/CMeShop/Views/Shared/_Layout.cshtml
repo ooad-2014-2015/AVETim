@@ -23,6 +23,23 @@
                     <li>@Html.ActionLink("Početna", "Index", "Home")</li>
                     <li>@Html.ActionLink("O nama", "About", "Home")</li>
                 </ul>
+                @if (Session["id"] != null)
+                {
+                    <ul class="nav navbar-nav navbar-right ">
+                        <li>@Html.ActionLink("Dobrodošli " + (string)Session["username"], "Details", "Account")</li>
+                        <li>@Html.ActionLink("Odjava", "Logout", "Account")</li>
+                        @if (Session["StavkeKosarice"] != null)
+                        {
+                            <li>@Html.ActionLink("Vaša korpa", "Index", "Kosarica")</li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <ul class="nav navbar-nav navbar-right ">
+                        <li>@Html.ActionLink("Prijava", "Login", "Account")</li>
+                    </ul>
+                }
             </div>
         </div>
     </div>
@@ -31,10 +48,10 @@
         <hr />
     </div>
     <style>
-        section.info{
-          position: absolute;
-          bottom: -190px;
-          right: 5px;
+        section.info {
+            position: absolute;
+            bottom: -190px;
+            right: 5px;
         }
     </style>
     <section class="info">
