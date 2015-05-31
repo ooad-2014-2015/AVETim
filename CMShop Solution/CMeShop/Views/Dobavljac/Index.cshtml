@@ -1,0 +1,82 @@
+﻿@model List<CMeShop.ViewModels.DobavljacArtikalViewModel>
+
+@{
+    ViewBag.Title = "Zalihe";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Stanje zaliha</h2>
+
+<h4>
+    Lista artikala čije zalihe treba obnoviti
+</h4>
+@using (Html.BeginForm("Index", "Dobavljac", FormMethod.Post)) {
+<table class="table">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            Naziv
+        </th>
+        <th>
+            Cijena
+        </th>
+        <th>
+            Proizvođač
+        </th>
+        <th>
+            Zemlja porijekla
+        </th>
+        <th>
+            Stanje zaliha
+        </th>
+        <th>
+            Opis
+        </th>
+        <th>
+            Obnovi zalihe
+        </th>
+        <th>
+            Količina
+        </th>
+        <th></th>
+    </tr>
+
+@for (int i = 0; i < Model.Count; i++ )
+{
+    <tr>
+        @Html.HiddenFor(modelItem => Model[i].ID)
+        <td>
+            @Html.DisplayFor(modelItem => Model[i].ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model[i].naziv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model[i].cijena)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model[i].proizvodjac)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model[i].zemljaPorijekla)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model[i].zaliheStanje)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model[i].opis)
+        </td>
+        <td>
+            @Html.EditorFor(modelItem => Model[i].updateovano)
+        </td>
+        <td>
+            @Html.EditorFor(modelItem => Model[i].kolicina)
+        </td>
+    </tr>
+}
+
+</table>
+    <input type="submit" value="Obnovi zalihe" name="Obnova zaliha"/>
+}

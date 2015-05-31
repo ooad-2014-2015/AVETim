@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<CMeShop.Models.Artikal>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Lista artikala";
 }
 
-<h2>Index</h2>
+<h2>Artikli</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Dodaj novi", "Create")
 </p>
 <table class="table">
     <tr>
@@ -71,9 +71,9 @@
             @Html.DisplayFor(modelItem => item.brojKupljenih)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Izmjeni", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Detalji", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Obriši", "Delete", new { id=item.ID })
         </td>
     </tr>
 }
