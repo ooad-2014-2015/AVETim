@@ -61,14 +61,6 @@ else {
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.cmKartica)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.cmKartica)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.bankovniRacun)
         </dt>
 
@@ -83,19 +75,10 @@ else {
         <dd>
             @Html.DisplayFor(model => model.brojCMkartice)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Kosarica.ID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Kosarica.ID)
-        </dd>
-
     </dl>
 </div> 
 }
 <p>
-    @if(ViewBag.ErrorPoruka == null) {@Html.ActionLink("Edit", "Edit", new { id = Model.ID }) }
+    @Html.ActionLink("Izmjeni podatke", "Edit", new { id = Model.ID }) | 
     @Html.ActionLink("Početna", "Index", "Home")
 </p>

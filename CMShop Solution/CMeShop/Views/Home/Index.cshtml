@@ -18,7 +18,7 @@
         <!-- Each product row contains info of 3 elements -->
         @foreach (var item in Model)
         {
-            for (int i = 0; i <= 3; i++) {
+            if(item.zaliheStanje >= 0) {
             <article class="productInfo">
                 <!-- Each individual product description -->
 
@@ -27,9 +27,9 @@
                 <p class="price">@item.cijena</p>
 
                 <p class="productContent">@item.naziv </p>
-
+    
                 <input id=@item.ID onclick="location.href='@Url.Action("Details", "Home", new { id = item.ID })'" type="button" name="button" value="Kupi" class="buyButton">
-
+               
             </article> }
         }
 

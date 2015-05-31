@@ -60,6 +60,11 @@ namespace CMeShop.Controllers
         // GET: Home/Details/5
         public ActionResult Details(int? id)
         {
+            if (Session["id"] == null || Session["StavkeKosarice"] == null)
+            {
+                ViewBag.Poruka = "Kupovinu artikala i dodavanje artikala u košaricu mogu izvršiti samo prijavljeni kupci.";
+                return View();
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

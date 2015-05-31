@@ -5,7 +5,11 @@
 }
 
 <h2>Detalji proizvoda</h2>
-@using (Html.BeginForm("Dodaj", "Kosarica", new { id = Model.ID }, FormMethod.Get))
+@if (ViewBag.Poruka != null) { 
+    <h5>@ViewBag.Poruka Kliknite @Html.ActionLink("OVDJE", "Login", "Account") da se prijavite na stranicu. </h5>
+}
+else { 
+using (Html.BeginForm("Dodaj", "Kosarica", new { id = Model.ID }, FormMethod.Get))
 {
 <div>
     <h4>Artikal</h4>
@@ -96,4 +100,4 @@
 <p>
     @Html.ActionLink("Početna", "Index")
 </p>
-
+}

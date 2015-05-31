@@ -244,7 +244,6 @@
     <Content Include="Views\Account\Details.cshtml" />
     <Content Include="Views\Artikli\Error.cshtml" />
     <Content Include="Web.config" />
-    <Content Include="Views\Account\Dummy.cshtml" />
     <Content Include="Views\Vlasnik\Delete.cshtml" />
     <Content Include="Views\Vlasnik\Details.cshtml" />
     <Content Include="Views\Vlasnik\Edit.cshtml" />
@@ -264,6 +263,7 @@
     <Content Include="Views\Dostavljac\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Kosarica\Zavrsi.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

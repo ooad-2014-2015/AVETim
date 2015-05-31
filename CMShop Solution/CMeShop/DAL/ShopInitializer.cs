@@ -27,7 +27,7 @@ namespace CMeShop.DAL
             context.SaveChanges();
             var kupci = new List<Kupac>
             {
-                new Kupac{ role="Kupac", adresa="Cengic Vila", bankovniRacun="43141241242151225", brojCMkartice="12/RWQO42", brojTelefona="4214214", cmKartica=true, ImeIprezime="Imenko Prezimenko", userName="kupac", password="kupac", slika="gsgdssdg", KosaricaID=1}
+                new Kupac{ role="Kupac", adresa="Cengic Vila", bankovniRacun="43141241242151225", brojCMkartice="12/RWQO42", brojTelefona="4214214",  ImeIprezime="Imenko Prezimenko", userName="kupac", password="kupac", slika="gsgdssdg", KosaricaID=1}
             };
             kupci.ForEach(a => context.Korisnici.Add(a));
             context.Korisnici.Add(new Dostavljac { brojTelefona = "42121412412", adresa = "Vitez BB", ImeIprezime = "Dostavljac Dostavko", userName = "dostavljac", password = "dostavljac", slika = "3214124124", role = "Dostavljac" });

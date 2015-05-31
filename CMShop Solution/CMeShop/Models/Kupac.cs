@@ -13,7 +13,12 @@ namespace CMeShop.Models
     public class Kupac : Osoba
     {
         [DisplayName("CM Kartica")]
-        public bool cmKartica { get; set; }
+        public bool cmKartica {
+            get
+            {
+                return brojCMkartice.Length>0;
+            }
+        }
         [DisplayName("Broj bankovne kartice")]
         public string bankovniRacun { get; set; }
         [DisplayName("Broj CM kartice")]

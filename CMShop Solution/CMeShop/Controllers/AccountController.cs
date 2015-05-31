@@ -54,7 +54,36 @@ namespace CMeShop.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-/*
+        public ActionResult Edit(int? id)
+        {
+            if (Session["id"] == null || (string)Session["role"] != "Kupac" || id != (int)Session["id"])
+                ViewBag.Poruka = "Možete izmjeniti podatke, samo kada ste prijavljeni, i to od vlastitog računa.";
+            return View((Kupac)db.Korisnici.Find(id));
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Kupac kupac)
+        {
+            if(ModelState.IsValid)
+            {
+                var userFromDb = (Kupac)db.Korisnici.Find(kupac.ID);
+                userFromDb.ImeIprezime = kupac.ImeIprezime;
+                userFromDb.password = kupac.password;
+                userFromDb.userName = kupac.userName;
+                userFromDb.slika = kupac.slika;
+                userFromDb.brojCMkartice = kupac.brojCMkartice;
+                userFromDb.bankovniRacun = kupac.bankovniRacun;
+                userFromDb.adresa = kupac.adresa;
+                userFromDb.brojTelefona = kupac.brojTelefona;
+                var kosarica = db.Kosarice.Find(kupac.KosaricaID);
+                db.Entry(kosarica).State = System.Data.Entity.EntityState.Modified;
+                db.Entry(userFromDb).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                ViewBag.Poruka = "Uspjesno ste izmjenili korisničke podatke.";
+            }
+            return View();
+        }
+/*      
         public ActionResult Login()
         {
             if (Session["username"] != null) return RedirectToAction("Index", "Home");

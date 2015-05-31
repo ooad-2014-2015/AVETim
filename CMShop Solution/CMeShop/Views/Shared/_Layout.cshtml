@@ -26,18 +26,19 @@
                 @if (Session["id"] != null)
                 {
                     <ul class="nav navbar-nav navbar-right ">
-                        <li>@Html.ActionLink("Dobrodošli " + (string)Session["username"], "Details", "Account")</li>
-                        <li>@Html.ActionLink("Odjava", "Logout", "Account")</li>
+                        <li>@Html.ActionLink("Dobrodošli " + (string)Session["username"], "Details", (string)Session["role"])</li>
                         @if (Session["StavkeKosarice"] != null)
                         {
                             <li>@Html.ActionLink("Vaša korpa", "Index", "Kosarica")</li>
                         }
+                        <li>@Html.ActionLink("Odjava", "Logout", "Account")</li>
                     </ul>
                 }
                 else
                 {
                     <ul class="nav navbar-nav navbar-right ">
                         <li>@Html.ActionLink("Prijava", "Login", "Account")</li>
+                        <li>@Html.ActionLink("Registracija", "Register", "Account")</li>
                     </ul>
                 }
             </div>
