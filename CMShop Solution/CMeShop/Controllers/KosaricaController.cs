@@ -32,6 +32,8 @@ namespace CMeShop.Controllers
 
         public ActionResult Zavrsi()
         {
+            List<StavkaKosarice> stavke = (List<StavkaKosarice>)Session["StavkeKosarice"];
+            if (stavke == null || stavke.Count == 0) return View("~/Views/Shared/Error.cshtml");
             ViewBag.Poruka = "Kako bi ste završili kupovinu, odaberite način plaćanja. U slučaju da posjedujete CM potrošačku karticu, bit će vam obračunat popust od 5%.";
             return View();
         }
@@ -39,7 +41,6 @@ namespace CMeShop.Controllers
         public ActionResult Dodaj(Nullable<int> id, Nullable<int> kol)
         {
             kol = Convert.ToInt32(this.Request.QueryString["kolicina"]);
-
             if (Session["id"] == null)
             {
                 ViewBag.Poruka = "Dodavanje artikala u košaricu mogu izvršiti samo registrovani kupci.";
@@ -81,14 +82,18 @@ namespace CMeShop.Controllers
         }
         public ActionResult Finish() //konačni završetak narudzbe i finalizacija kupovine
         {
-            if (Session["StavkeKosarice"] == null) return RedirectToAction("Index", "Home");
             var listaStavki = (List<StavkaKosarice>)Session["StavkeKosarice"];
-            if (listaStavki.Count == 0) return RedirectToAction("Index", "Home");
+            if (listaStavki == null || listaStavki.Count == 0) return View("~/Views/Shared/Error.cshtml");
             foreach (var item in listaStavki)
             {
                 using (var ctx = new ShopContext())
                 {
                     item.datumKreiranja = DateTime.Now;
+                    Kupac kup = (Kupac)db.Korisnici.Find(Session["id"]);
+                    if(kup.cmKartica)
+                    {
+                        item.UkupnaCijena = item.obracunajCijenuSaPopustom(); // popust od 5% za vlasnike CM kartice
+                    }
                     ctx.StavkeKosarice.Add(item);
                     var artikal = ctx.Artikli.Find(item.ArtikalID);
                     var kosarica = ctx.Kosarice.Find(item.KosaricaID);
@@ -117,6 +122,7 @@ namespace CMeShop.Controllers
         // GET: Kosarica/Details/5
         public ActionResult Details(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

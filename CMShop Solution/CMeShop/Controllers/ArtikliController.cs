@@ -18,12 +18,14 @@ namespace CMeShop.Controllers
         // GET: Artikli
         public ActionResult Index()
         {
+            if((string)Session["role"] != "Vlasnik") return View("~/Views/Shared/Error.cshtml");
             return View(db.Artikli.ToList());
         }
 
         // GET: Artikli/Details/5
         public ActionResult Details(int? id)
         {
+            if ((string)Session["role"] != "Vlasnik") return View("~/Views/Shared/Error.cshtml");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -39,6 +41,7 @@ namespace CMeShop.Controllers
         // GET: Artikli/Create
         public ActionResult Create()
         {
+            if ((string)Session["role"] != "Vlasnik") return View("~/Views/Shared/Error.cshtml");
             return View();
         }
 
@@ -62,6 +65,7 @@ namespace CMeShop.Controllers
         // GET: Artikli/Edit/5
         public ActionResult Edit(int? id)
         {
+            if ((string)Session["role"] != "Vlasnik") return View("~/Views/Shared/Error.cshtml");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -93,6 +97,7 @@ namespace CMeShop.Controllers
         // GET: Artikli/Delete/5
         public ActionResult Delete(int? id)
         {
+            if ((string)Session["role"] != "Vlasnik") return View("~/Views/Shared/Error.cshtml");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

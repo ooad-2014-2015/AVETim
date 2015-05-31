@@ -193,6 +193,7 @@
     <Compile Include="Models\Vlasnik.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\DobavljacArtikalViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -264,6 +265,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Kosarica\Zavrsi.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Dobavljac\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -273,6 +275,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Users\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

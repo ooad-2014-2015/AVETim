@@ -7,27 +7,26 @@ using System.Web.Security;
 using System.Web.Mvc;
 using System.Web;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace CMeShop.Models
 {
     public class Kupac : Osoba
     {
-        [DisplayName("CM Kartica")]
-        public bool cmKartica {
-            get
-            {
-                return brojCMkartice.Length>0;
-            }
-        }
         [DisplayName("Broj bankovne kartice")]
+        [DataType(DataType.CreditCard)]
         public string bankovniRacun { get; set; }
         [DisplayName("Broj CM kartice")]
         public string brojCMkartice { get; set; }
         public int KosaricaID { get; set; }
         public virtual Kosarica Kosarica { get; set; }
-        public override void prijava(object user) { }
-        public override void registracija() { }
-        public void kosarica() { }
+        public bool cmKartica
+        {
+            get
+            {
+                return brojCMkartice.Length > 0;
+            }
+        }
     }
 }
 

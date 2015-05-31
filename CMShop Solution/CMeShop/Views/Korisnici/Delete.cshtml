@@ -51,22 +51,15 @@
             @Html.DisplayFor(model => model.password)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.slika)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.slika)
-        </dd>
-
+    
     </dl>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Obriši" class="btn btn-default" /> |
+            @Html.ActionLink("Natrag na listu", "Index")
         </div>
     }
 </div>

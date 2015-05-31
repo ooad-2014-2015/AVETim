@@ -37,13 +37,9 @@ namespace CMeShop.Controllers
         }
         public ActionResult Index()
         {
+            if ((string)Session["role"] != "Dostavljac") return View("~/Views/Shared/Error.cshtml");
             var stavke = db.StavkeKosarice.Include(a => a.artikal).Where(b => b.isporuceno==false);
             return View(stavke.ToList());
-        }
-        public ActionResult Login()
-        {
-            if (Session["username"] != null) return RedirectToAction("Index", "Home");
-            return View();
         }
 
         [HttpPost]
@@ -68,6 +64,7 @@ namespace CMeShop.Controllers
         }
         public ActionResult Details()
         {
+            if ((string)Session["role"] != "Dostavljac") return View("~/Views/Shared/Error.cshtml");
             if (Session["id"] != null)
             {
                 Dostavljac dostavljac = (Dostavljac)db.Korisnici.Find(Session["id"]);
@@ -80,12 +77,6 @@ namespace CMeShop.Controllers
             }
 
         }
-        public ActionResult Logout()
-        {
-            Session.RemoveAll();
-            return RedirectToAction("Index", "Home");
-        }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

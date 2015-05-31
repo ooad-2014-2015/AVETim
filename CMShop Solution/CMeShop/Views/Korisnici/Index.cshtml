@@ -26,9 +26,6 @@
         <th>
             @Html.DisplayNameFor(model => model.password)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.slika)
-        </th>
         <th></th>
     </tr>
 
@@ -50,12 +47,9 @@
             @Html.DisplayFor(modelItem => item.password)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.slika)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Izmjeni", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Detalji", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Obriši", "Delete", new { id=item.ID })
         </td>
     </tr>
 }

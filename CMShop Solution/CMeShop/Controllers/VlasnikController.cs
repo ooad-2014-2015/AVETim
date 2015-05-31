@@ -16,32 +16,6 @@ namespace CMeShop.Controllers
     {
         private ShopContext db = new ShopContext();
 
-        public ActionResult Login()
-        {
-            if (Session["username"] != null) return RedirectToAction("Index", "Home");
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Login(Vlasnik vlasnik)
-        {
-            var count = db.Korisnici.Where(x => x.userName == vlasnik.userName && x.password == vlasnik.password).Count();
-            if (count == 0)
-            {
-                ViewBag.Poruka = "Podaci za prijavu su netačni. Molimo Vas provjerite vaše korisničko ime i lozinku.";
-                return View();
-            }
-            else
-            {
-                var userFromDb = db.Korisnici.Where(x => x.userName == vlasnik.userName).First();
-                if (userFromDb.role != "Vlasnik") { ViewBag.ErrorModel = "NotVlasnik"; return View(); }
-                FormsAuthentication.SetAuthCookie(vlasnik.userName, false);
-                Session["username"] = userFromDb.userName;
-                Session["id"] = userFromDb.ID;
-                Session["role"] = userFromDb.role;
-                return RedirectToAction("Index", "Home");
-            }
-        }
         public ActionResult Details()
         {
             if (Session["id"] != null)
@@ -56,12 +30,6 @@ namespace CMeShop.Controllers
             }
 
         }
-        public ActionResult Logout()
-        {
-            Session.RemoveAll();
-            return RedirectToAction("Index", "Home");
-        }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -18,12 +18,14 @@ namespace CMeShop.Controllers
         // GET: Korisnici
         public ActionResult Index()
         {
+            if ((string)Session["role"] != "Vlasnik") return View("~/Views/Shared/Error.cshtml");
             return View(db.Korisnici.ToList());
         }
 
         // GET: Korisnici/Details/5
         public ActionResult Details(int? id)
         {
+            if ((string)Session["role"] != "Vlasnik") return View("~/Views/Shared/Error.cshtml");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -39,6 +41,7 @@ namespace CMeShop.Controllers
         // GET: Korisnici/Create
         public ActionResult Create()
         {
+            if ((string)Session["role"] != "Vlasnik") return View("~/Views/Shared/Error.cshtml");
             return View();
         }
 
@@ -47,12 +50,22 @@ namespace CMeShop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,ImeIprezime,brojTelefona,adresa,userName,password,slika")] Osoba osoba)
+        public ActionResult Create([Bind(Include = "ImeIprezime,brojTelefona,adresa,userName,password,slika")] Osoba osoba)
         {
             if (ModelState.IsValid)
             {
-                db.Korisnici.Add(osoba);
-                db.SaveChanges();
+                if(osoba.role == "Kupac")
+                {
+                    var kupac = osoba as Kupac;
+                    kupac.Kosarica = new Kosarica();
+                    db.Korisnici.Add(kupac);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    db.Korisnici.Add(osoba);
+                    db.SaveChanges();
+                }
                 return RedirectToAction("Index");
             }
 
@@ -62,6 +75,7 @@ namespace CMeShop.Controllers
         // GET: Korisnici/Edit/5
         public ActionResult Edit(int? id)
         {
+            if ((string)Session["role"] != "Vlasnik") return View("~/Views/Shared/Error.cshtml");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -93,6 +107,7 @@ namespace CMeShop.Controllers
         // GET: Korisnici/Delete/5
         public ActionResult Delete(int? id)
         {
+            if ((string)Session["role"] != "Vlasnik") return View("~/Views/Shared/Error.cshtml");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

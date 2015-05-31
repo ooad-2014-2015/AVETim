@@ -8,10 +8,5 @@ namespace CMeShop.Models
 {
     public class Dostavljac : Osoba
     {
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public ListaNarudzbi listaNarudzbi { get; set; }
-        public override void prijava(object user) { }
-        public override void registracija() { }
-        public void azurirajListu() { }
     }
 }

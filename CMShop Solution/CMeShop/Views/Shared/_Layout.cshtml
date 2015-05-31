@@ -26,7 +26,14 @@
                 @if (Session["id"] != null)
                 {
                     <ul class="nav navbar-nav navbar-right ">
-                        <li>@Html.ActionLink("Dobrodošli " + (string)Session["username"], "Details", (string)Session["role"])</li>
+                        @if ((string)Session["role"] != "Kupac")
+                        {
+                            <li>@Html.ActionLink("Dobrodošli " + (string)Session["username"], "Details", (string)Session["role"], new { id = Session["id"] }, null)</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("Dobrodošli " + (string)Session["username"], "Details", "Account", new { id = Session["id"] }, null)</li>
+                        }
                         @if (Session["StavkeKosarice"] != null)
                         {
                             <li>@Html.ActionLink("Vaša korpa", "Index", "Kosarica")</li>

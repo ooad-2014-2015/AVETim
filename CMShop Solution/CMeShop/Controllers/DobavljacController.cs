@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using CMeShop.DAL;
 using CMeShop.Models;
 using System.Web.Security;
+using CMeShop.ViewModels;
 
 namespace CMeShop.Controllers
 {
@@ -16,34 +17,52 @@ namespace CMeShop.Controllers
     {
         private ShopContext db = new ShopContext();
 
-        public ActionResult Login()
-        {
-            if (Session["username"] != null) return RedirectToAction("Index", "Home");
-            return View();
-        }
+        const int minimalnoStanje = 10;
 
         [HttpPost]
-        public ActionResult Login(Dobavljac dobavljac)
+        public ActionResult Index(List<DobavljacArtikalViewModel> updateovaniArtikli)
         {
-            var count = db.Korisnici.Where(x => x.userName == dobavljac.userName && x.password == dobavljac.password).Count();
-            if (count == 0)
+            if(ModelState.IsValid)
             {
-                ViewBag.Poruka = "Podaci za prijavu su netačni. Molimo Vas provjerite vaše korisničko ime i lozinku.";
-                return View();
+                foreach (var item in updateovaniArtikli)
+                {
+                    if(item.updateovano == true)
+                    {
+                        var artikal = db.Artikli.Find(item.ID);
+                        artikal.zaliheStanje += item.kolicina;
+                        db.Entry(artikal).State = EntityState.Modified;
+                    }
+                }
+                db.SaveChanges();
             }
-            else
-            {
-                var userFromDb = db.Korisnici.Where(x => x.userName == dobavljac.userName).First();
-                if (userFromDb.role != "Dostavljac") { ViewBag.ErrorModel = "NotDobavljac"; return View(); }
-                FormsAuthentication.SetAuthCookie(dobavljac.userName, false);
-                Session["username"] = userFromDb.userName;
-                Session["id"] = userFromDb.ID;
-                Session["role"] = userFromDb.role;
-                return RedirectToAction("Index", "Home");
-            }
+            return RedirectToAction("Index", "Dobavljac");
         }
+
+        public ActionResult Index()
+        {
+            if ((string)Session["role"] != "Dobavljac") return View("~/Views/Shared/Error.cshtml");
+            List<DobavljacArtikalViewModel> artikli = new List<DobavljacArtikalViewModel>(); 
+            foreach (var item in db.Artikli)
+            {
+                if (item.zaliheStanje <= minimalnoStanje) artikli.Add(new DobavljacArtikalViewModel
+                {
+                    ID = item.ID,
+                    cijena = item.cijena,
+                    kolicina = 0,
+                    naziv = item.naziv,
+                    opis = item.opis,
+                    proizvodjac = item.proizvodjac,
+                    updateovano = false,
+                    zaliheStanje = item.zaliheStanje,
+                    zemljaPorijekla = item.zemljaPorijekla
+                });
+            }
+            return View(artikli);
+        }
+
         public ActionResult Details()
         {
+            if ((string)Session["role"] != "Dobavljac") return View("~/Views/Shared/Error.cshtml");
             if (Session["id"] != null)
             {
                 Dobavljac dobavljac = (Dobavljac)db.Korisnici.Find(Session["id"]);
@@ -55,11 +74,6 @@ namespace CMeShop.Controllers
                 return View();
             }
 
-        }
-        public ActionResult Logout()
-        {
-            Session.RemoveAll();
-            return RedirectToAction("Index", "Home");
         }
 
         protected override void Dispose(bool disposing)

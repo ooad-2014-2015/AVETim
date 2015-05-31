@@ -7,6 +7,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using System.Threading;
+using System.IO;
+using System.Web.UI.WebControls;
 
 namespace CMeShop.Controllers
 {
@@ -15,6 +17,7 @@ namespace CMeShop.Controllers
         private ShopContext db = new ShopContext();
         public ActionResult Register()
         {
+            if (!(Session["id"] == null)) return View("~/Views/Shared/Error.cshtml");
             return View();
         }
         [HttpPost]
@@ -25,14 +28,17 @@ namespace CMeShop.Controllers
                 var count = db.Korisnici.Where(x => x.userName == kupac.userName).Count();
                 if (count > 0) { ViewBag.Poruka = "Već postoji registrovan kupac sa datim korisničkim imenom. Izaberite drugi username."; return View(); }
                 kupac.Kosarica = new Kosarica();
+                kupac.role = "Kupac";
                 db.Korisnici.Add(kupac);
                 db.SaveChanges();
+                LogirajKorisnika(kupac.userName);
                 return RedirectToAction("Index", "Home");
             }
             return View();
         }
         public ActionResult Login()
         {
+            if (!(Session["id"] == null)) return View("~/Views/Shared/Error.cshtml");
             return View();
         }
         [HttpPost]
@@ -46,13 +52,18 @@ namespace CMeShop.Controllers
             }
             else
             {
-                var userFromDb = db.Korisnici.Where(x => x.userName == user.userName).First();
-                Session["username"] = userFromDb.userName;
-                Session["id"] = userFromDb.ID;
-                Session["role"] = userFromDb.role;
-                if (userFromDb.role == "Kupac") Session["StavkeKosarice"] = new List<CMeShop.Models.StavkaKosarice>();
+                LogirajKorisnika(user.userName);
                 return RedirectToAction("Index", "Home");
             }
+        }
+
+        private void LogirajKorisnika(string userName)
+        {
+            var userFromDb = db.Korisnici.Where(x => x.userName == userName).First();
+            Session["username"] = userFromDb.userName;
+            Session["id"] = userFromDb.ID;
+            Session["role"] = userFromDb.role;
+            if (userFromDb.role == "Kupac") Session["StavkeKosarice"] = new List<CMeShop.Models.StavkaKosarice>();
         }
         public ActionResult Edit(int? id)
         {
@@ -64,13 +75,12 @@ namespace CMeShop.Controllers
         [HttpPost]
         public ActionResult Edit(Kupac kupac)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var userFromDb = (Kupac)db.Korisnici.Find(kupac.ID);
                 userFromDb.ImeIprezime = kupac.ImeIprezime;
                 userFromDb.password = kupac.password;
                 userFromDb.userName = kupac.userName;
-                userFromDb.slika = kupac.slika;
                 userFromDb.brojCMkartice = kupac.brojCMkartice;
                 userFromDb.bankovniRacun = kupac.bankovniRacun;
                 userFromDb.adresa = kupac.adresa;
@@ -83,38 +93,10 @@ namespace CMeShop.Controllers
             }
             return View();
         }
-/*      
-        public ActionResult Login()
-        {
-            if (Session["username"] != null) return RedirectToAction("Index", "Home");
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Login(Kupac kupac)
-        {
-            var count = db.Korisnici.Where(x => x.userName == kupac.userName && x.password == kupac.password).Count();
-            if (count == 0)
-            {
-                ViewBag.Poruka = "Podaci za prijavu su netačni. Molimo Vas provjerite vaše korisničko ime i lozinku.";
-                return View();
-            }
-            else
-            {
-                var userFromDb = db.Korisnici.Where(x => x.userName == kupac.userName).First();
-                if (userFromDb.role == "Vlasnik") { ViewBag.ErrorModel = "Vlasnik" ; return View(); }
-                else if (userFromDb.role == "Dostavljac") { ViewBag.ErrorModel = "Ovdje se mogu prijaviti samo registrovani kupci. Ukoliko se zelite prijaviti kao Dostavljač to možete učiniti "; return View(); }
-                else if (userFromDb.role == "Dobavljac") { ViewBag.ErrorModel = "Ovdje se mogu prijaviti samo registrovani kupci. Ukoliko se zelite prijaviti kao Dobavljač to možete učiniti "; return View(); }
-                FormsAuthentication.SetAuthCookie(kupac.userName, false);
-                Session["username"] = userFromDb.userName;
-                Session["id"] = userFromDb.ID;
-                Session["role"] = userFromDb.role;
-                Session["StavkeKosarice"] = new List<StavkaKosarice>();
-                return RedirectToAction("Index", "Home");
-            }
-        }*/
+        /*Koristen thread*/
         public ActionResult Details()
         {
+            if((string)Session["role"] != "Kupac") return View("~/Views/Shared/Error.cshtml");
             Kupac kupac = null;
             Thread mojThread = new Thread(() => prikupiDetalje(out kupac));
             mojThread.Start();
@@ -123,6 +105,7 @@ namespace CMeShop.Controllers
             if (kupac != null) return View(kupac);
             return View();
         }
+
         public ActionResult Logout()
         {
             Session.RemoveAll();
