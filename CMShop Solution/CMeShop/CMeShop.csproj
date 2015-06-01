@@ -200,6 +200,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\Slike\kup.png" />
     <Content Include="Content\Slike\karmin.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -235,17 +236,13 @@
     <Content Include="Views\Korisnici\Details.cshtml" />
     <Content Include="Views\Korisnici\Edit.cshtml" />
     <Content Include="Views\Korisnici\Index.cshtml" />
-    <Content Include="Views\Home\Create.cshtml" />
-    <Content Include="Views\Home\Delete.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
-    <Content Include="Views\Home\Edit.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Details.cshtml" />
     <Content Include="Views\Artikli\Error.cshtml" />
     <Content Include="Web.config" />
-    <Content Include="Views\Vlasnik\Delete.cshtml" />
     <Content Include="Views\Vlasnik\Details.cshtml" />
     <Content Include="Views\Vlasnik\Edit.cshtml" />
     <Content Include="Views\Vlasnik\Index.cshtml" />
@@ -266,6 +263,9 @@
     <Content Include="Views\Kosarica\Zavrsi.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Dobavljac\Index.cshtml" />
+    <Content Include="Views\Korisnici\Kupci.cshtml" />
+    <Content Include="Views\Korisnici\Dostavljaci.cshtml" />
+    <Content Include="Views\Korisnici\Dobavljaci.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

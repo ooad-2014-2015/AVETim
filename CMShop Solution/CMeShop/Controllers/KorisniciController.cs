@@ -19,7 +19,46 @@ namespace CMeShop.Controllers
         public ActionResult Index()
         {
             if ((string)Session["role"] != "Vlasnik") return View("~/Views/Shared/Error.cshtml");
-            return View(db.Korisnici.ToList());
+            return View();
+        }
+
+        public ActionResult Kupci()
+        {
+            if ((string)Session["role"] != "Vlasnik") return View("~/Views/Shared/Error.cshtml");
+            List<Kupac> kupci = new List<Kupac>();
+            foreach (var item in db.Korisnici.ToList())
+	        {
+		        Kupac kupac = item as Kupac;
+                if(kupac != null && kupac.role == "Kupac")
+                    kupci.Add(kupac);
+	        }
+            return View(kupci);
+        }
+
+        public ActionResult Dostavljaci()
+        {
+            if ((string)Session["role"] != "Vlasnik") return View("~/Views/Shared/Error.cshtml");
+            List<Dostavljac> dostavljaci = new List<Dostavljac>();
+            foreach (var item in db.Korisnici.ToList())
+            {
+                Dostavljac dost = item as Dostavljac;
+                if (dost != null && dost.role == "Dostavljac")
+                    dostavljaci.Add(dost);
+            }
+            return View(dostavljaci);
+        }
+
+        public ActionResult Dobavljaci()
+        {
+            if ((string)Session["role"] != "Vlasnik") return View("~/Views/Shared/Error.cshtml");
+            List<Dobavljac> dobavljaci = new List<Dobavljac>();
+            foreach (var item in db.Korisnici.ToList())
+            {
+                Dobavljac dob = item as Dobavljac;
+                if (dob != null && dob.role == "Dobavljac")
+                    dobavljaci.Add(dob);
+            }
+            return View(dobavljaci);
         }
 
         // GET: Korisnici/Details/5

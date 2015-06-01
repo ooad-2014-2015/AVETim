@@ -94,11 +94,11 @@ namespace CMeShop.Controllers
             return View();
         }
         /*Koristen thread*/
-        public ActionResult Details()
+        public ActionResult Details(int? id)
         {
-            if((string)Session["role"] != "Kupac") return View("~/Views/Shared/Error.cshtml");
+            if(!((string)Session["role"] == "Kupac" && id.Value != (int)Session["id"]) || (string)Session["role"] != "Vlasnik") return View("~/Views/Shared/Error.cshtml");
             Kupac kupac = null;
-            Thread mojThread = new Thread(() => prikupiDetalje(out kupac));
+            Thread mojThread = new Thread(() => prikupiDetalje(id, out kupac));
             mojThread.Start();
             while (!mojThread.IsAlive) ;
             mojThread.Join();
@@ -111,11 +111,17 @@ namespace CMeShop.Controllers
             Session.RemoveAll();
             return RedirectToAction("Index", "Home");
         }
-        public void prikupiDetalje(out Kupac kupac)
+        public void prikupiDetalje(int? id, out Kupac kupac)
         {
-            if (Session["id"] != null)
+            if (Session["id"] != null && (string)Session["role"] == "Kupac")
             {
                 kupac = (Kupac)db.Korisnici.Find(Session["id"]);
+                return;
+            }
+            else if (id != null && (string)Session["role"] == "Vlasnik")
+            {
+                kupac = (Kupac)db.Korisnici.Find(id);
+                return;
             }
             else
             {

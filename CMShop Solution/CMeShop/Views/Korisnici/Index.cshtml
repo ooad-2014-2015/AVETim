@@ -1,57 +1,11 @@
-﻿@model IEnumerable<CMeShop.Models.Osoba>
-
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    ViewBag.Title = "Korisnici Sistema";
 }
 
-<h2>Index</h2>
+<h2>Administracija korisnika online prodavnice</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ImeIprezime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.brojTelefona)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.adresa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.userName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.password)
-        </th>
-        <th></th>
-    </tr>
+<h3>@Html.ActionLink("Kupci", "Kupci")</h3>
+<h3>@Html.ActionLink("Dobavljači", "Dobavljaci")</h3>
+<h3>@Html.ActionLink("Dostavljači", "Dostavljaci")</h3>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ImeIprezime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.brojTelefona)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.adresa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.userName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.password)
-        </td>
-        <td>
-            @Html.ActionLink("Izmjeni", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Detalji", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Obriši", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
 
-</table>

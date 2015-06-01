@@ -60,12 +60,17 @@ namespace CMeShop.Controllers
             return View(artikli);
         }
 
-        public ActionResult Details()
+        public ActionResult Details(int? id)
         {
-            if ((string)Session["role"] != "Dobavljac") return View("~/Views/Shared/Error.cshtml");
-            if (Session["id"] != null)
+            if ((string)Session["role"] != "Dobavljac" && (string)Session["role"] != "Vlasnik") return View("~/Views/Shared/Error.cshtml");
+            if (Session["id"] != null && (string)Session["role"] == "Dobavljac")
             {
                 Dobavljac dobavljac = (Dobavljac)db.Korisnici.Find(Session["id"]);
+                return View(dobavljac);
+            }
+            else if(id != null && (string)Session["role"] == "Vlasnik")
+            {
+                Dobavljac dobavljac = (Dobavljac)db.Korisnici.Find(id);
                 return View(dobavljac);
             }
             else
@@ -73,7 +78,6 @@ namespace CMeShop.Controllers
                 ViewBag.ErrorPoruka = "Niste logovani. Molimo vas da se prijavite kako bi ste mogli pristupiti vašem računu.";
                 return View();
             }
-
         }
 
         protected override void Dispose(bool disposing)

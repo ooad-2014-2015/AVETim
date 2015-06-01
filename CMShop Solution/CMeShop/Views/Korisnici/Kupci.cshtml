@@ -1,0 +1,82 @@
+﻿@model IEnumerable<CMeShop.Models.Kupac>
+
+@{
+    ViewBag.Title = "Kupci";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Kupci</h2>
+
+<p>
+    @Html.ActionLink("Dodaj novog kupca", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ImeIprezime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.brojTelefona)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.adresa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.userName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.role)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.bankovniRacun)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.brojCMkartice)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ImeIprezime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.brojTelefona)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.adresa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.userName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.role)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.bankovniRacun)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.brojCMkartice)
+        </td>
+        <td>
+            @Html.ActionLink("Izmjeni", "Edit", "Account", new { id=item.ID }, null) |
+            @Html.ActionLink("Detalji", "Details", "Account", new { id=item.ID }, null) |
+            @Html.ActionLink("Obriši", "Delete", "Account", new { id=item.ID }, null)
+        </td>
+    </tr>
+}
+
+</table>
