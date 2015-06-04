@@ -16,6 +16,10 @@ namespace CMeShop.Controllers
     {
         private ShopContext db = new ShopContext();
 
+        public ViewResult Uputstvo()
+        {
+            return View();
+        }
         // GET: Home
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
