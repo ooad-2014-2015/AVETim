@@ -9,17 +9,17 @@
 
 <h3>Da li se sigurni da želite ukloniti artikal @Model.artikal.naziv iz vaše košarice?</h3>
 <div>
-    <h4></h4>
     <hr />
-    <dl class="dl-horizontal">
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Povratak na Košaricu", "Index")
-        </div>
-    }
+    <dl class="dl-horizontal"></dl>
 </div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Ukloni" class="btn btn-default" /> |
+        @Html.ActionLink("Povratak na Košaricu", "Index")
+    </div>
+}
+

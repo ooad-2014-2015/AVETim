@@ -1,7 +1,7 @@
 ﻿@model CMeShop.Models.Artikal
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Informacije o artiklu";
 }
 
 <h2>Podaci o artiklu</h2>
@@ -23,7 +23,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.slika)
+            <img src="@Url.Content(Model.slika)" height="200" width="200" />
         </dd>
 
         <dt>
@@ -85,6 +85,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Izmjeni", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Povratak na listu", "Index")
 </p>

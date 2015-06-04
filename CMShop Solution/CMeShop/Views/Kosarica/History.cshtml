@@ -1,0 +1,58 @@
+﻿@model List<CMeShop.Models.StavkaKosarice>
+
+@{
+    ViewBag.Title = "Historija narudžbi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Historija vaših narudžbi i kupovine</h2>
+
+<table class="table">
+    <tr>
+        <th>
+           <b>Naziv artikla</b>
+        </th>
+        <th>
+            <b>Količina</b>
+        </th>
+        <th>
+            <b>Isporučeno na adresu</b>
+        </th>
+        <th>
+            <b>Način plaćanja</b>
+        </th>
+        <th>
+            <b>Datum kupovine</b>
+        </th>
+        <th>
+            <b>Ukupna cijena</b>
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.artikal.naziv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.kolicina)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.adresa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nacinPlacanja)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.datumKreiranja)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UkupnaCijena)
+        </td>
+    </tr>
+}
+
+</table>
+
+@Html.ActionLink("Povratak na košaricu", "Index")

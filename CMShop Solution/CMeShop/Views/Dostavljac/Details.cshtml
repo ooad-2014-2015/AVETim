@@ -1,14 +1,14 @@
 ﻿@model CMeShop.Models.Dostavljac
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalji";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
-
+<h2>Informacije o korisničkom računu</h2>
+<h4>@ViewBag.Poruka</h4>
 <div>
-    <h4>Dostavljac</h4>
+    <h4>Dostavljač</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -51,17 +51,12 @@
             @Html.DisplayFor(model => model.password)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.role)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.role)
-        </dd>
-
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Izmjeni profil", "Edit", new { id = Model.ID }) |
+    @if ((string)Session["role"] == "Dostavljac")
+    { @Html.ActionLink("Povratak na listu", "Index")}
+    else if ((string)Session["role"] == "Vlasnik")
+    { @Html.ActionLink("Povratak na listu", "Dostavljaci", "Korisnici")}
 </p>

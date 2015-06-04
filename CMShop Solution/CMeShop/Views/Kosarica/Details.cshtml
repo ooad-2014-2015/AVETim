@@ -1,16 +1,39 @@
-﻿@model CMeShop.Models.Kosarica
+﻿@model CMeShop.Models.StavkaKosarice
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalji artikla u košarici";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Detalji o proizvodu</h2>
 
 <div>
-    <h4>Košarica</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(a => a.artikal.naziv)
+        </dt>
+        <dd>
+            @Html.DisplayFor(a => a.artikal.naziv)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(a => a.artikal.slika)
+        </dt>
+        <dd>
+            <img src="@Url.Content(Model.artikal.slika)" height="200" width="200" />
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(a => a.artikal.cijena)
+        </dt>
+        <dd>
+            @Html.DisplayFor(a => a.artikal.cijena)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(a => a.kolicina)
+        </dt>
+        <dd>
+            @Html.DisplayFor(a => a.kolicina)
+        </dd>
     </dl>
 </div>
 <p>

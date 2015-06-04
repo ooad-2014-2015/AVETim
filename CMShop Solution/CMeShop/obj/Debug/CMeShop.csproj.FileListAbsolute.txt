@@ -229,4 +229,3 @@ C:\Users\Hrustic\Documents\AVETim\CMShop Solution\CMeShop\bin\Microsoft.Owin.Sec
 C:\Users\Hrustic\Documents\AVETim\CMShop Solution\CMeShop\obj\Debug\CMeShop.dll
 C:\Users\Hrustic\Documents\AVETim\CMShop Solution\CMeShop\obj\Debug\CMeShop.pdb
 C:\Users\Hrustic\Documents\AVETim\CMShop Solution\CMeShop\obj\Debug\CMeShop.csprojResolveAssemblyReference.cache
-C:\Users\Vejsil\Documents\GitHub\AVETim\CMShop Solution\CMeShop\obj\Debug\CMeShop.csprojResolveAssemblyReference.cache

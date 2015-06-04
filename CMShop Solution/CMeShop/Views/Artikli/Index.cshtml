@@ -47,7 +47,7 @@
             @Html.DisplayFor(modelItem => item.naziv)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.slika)
+            <img src="@Url.Content(item.slika)" height="40" width="50" />
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.cijena)
@@ -71,7 +71,7 @@
             @Html.DisplayFor(modelItem => item.brojKupljenih)
         </td>
         <td>
-            @Html.ActionLink("Izmjeni", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Izmjeni", "Edit", new { id = item.ID }) |
             @Html.ActionLink("Detalji", "Details", new { id=item.ID }) |
             @Html.ActionLink("Obriši", "Delete", new { id=item.ID })
         </td>

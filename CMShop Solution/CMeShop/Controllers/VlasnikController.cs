@@ -30,6 +30,28 @@ namespace CMeShop.Controllers
             }
 
         }
+
+        public ActionResult Edit(int? id)
+        {
+            if ((string)Session["role"] != "Vlasnik") return View("~/Views/Shared/Error.cshtml");
+            return View((Vlasnik)db.Korisnici.Find(id));
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Dostavljac dostavljac)
+        {
+            var userFromDb = (Vlasnik)db.Korisnici.Find(dostavljac.ID);
+            userFromDb.ImeIprezime = dostavljac.ImeIprezime;
+            userFromDb.password = dostavljac.password;
+            userFromDb.userName = dostavljac.userName;
+            userFromDb.adresa = dostavljac.adresa;
+            userFromDb.brojTelefona = dostavljac.brojTelefona;
+            userFromDb.email = dostavljac.email;
+            db.Entry(userFromDb).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            ViewBag.Poruka = "Uspjesno ste izmjenili korisničke podatke.";
+            return View();
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

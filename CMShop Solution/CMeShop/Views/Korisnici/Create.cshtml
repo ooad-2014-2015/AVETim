@@ -1,12 +1,12 @@
-﻿@model CMeShop.Models.Osoba
+﻿@model CMeShop.ViewModels.CreateUserViewModel
 
 @{
-    ViewBag.Title = "Kreiranje novog usera";
+    ViewBag.Title = "Kreiranje novog korisnika";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Kreiranje novog korisnika</h2>
-
+<h2>Kreiranje novog korisnika: Kupac, Dostavljac ili Dobavljac</h2>
+<h4>@ViewBag.Poruka</h4>
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()

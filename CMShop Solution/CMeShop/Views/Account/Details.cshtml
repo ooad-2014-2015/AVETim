@@ -79,6 +79,6 @@ else {
 </div> 
 }
 <p>
-    @Html.ActionLink("Izmjeni podatke", "Edit", new { id = Model.ID }) | 
+    @Html.ActionLink("Izmjeni podatke", "Edit", new { id = (int)Session["id"] }) | 
     @Html.ActionLink("Početna", "Index", "Home")
 </p>

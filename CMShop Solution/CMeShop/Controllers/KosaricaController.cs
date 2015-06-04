@@ -30,6 +30,15 @@ namespace CMeShop.Controllers
             return View("~/Views/Shared/Error.cshtml");
         }
 
+        public ActionResult History()
+        {
+            List<StavkaKosarice> stavke = (List<StavkaKosarice>)Session["StavkeKosarice"];
+            if (stavke == null) return View("~/Views/Shared/Error.cshtml"); //znači da nije "Kupac"
+            var currentKupac = (Kupac)db.Korisnici.Find((int)Session["id"]);
+            var lista = db.StavkeKosarice.Where(a => (a.isporuceno == true && a.KosaricaID == currentKupac.KosaricaID)).Include(b => b.artikal).ToList();
+            return View(lista);
+        }
+
         public ActionResult Zavrsi()
         {
             List<StavkaKosarice> stavke = (List<StavkaKosarice>)Session["StavkeKosarice"];
@@ -122,17 +131,16 @@ namespace CMeShop.Controllers
         // GET: Kosarica/Details/5
         public ActionResult Details(int? id)
         {
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Kosarica kosarica = db.Kosarice.Find(id);
-            if (kosarica == null)
+            var lista = (List<StavkaKosarice>)Session["StavkeKosarice"];
+            if (lista == null)
             {
                 return HttpNotFound();
             }
-            return View(kosarica);
+            return View(lista[id.Value]);
         }
 
         // GET: Kosarica/Delete/5
@@ -142,12 +150,12 @@ namespace CMeShop.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            StavkaKosarice stavka = db.StavkeKosarice.Find(id);
-            if (stavka == null)
+            var lista = (List<StavkaKosarice>)Session["StavkeKosarice"];
+            if (lista == null)
             {
                 return HttpNotFound();
             }
-            return View(stavka);
+            return View(lista[id.Value]);
         }
 
         // POST: Kosarica/Delete/5
@@ -155,9 +163,8 @@ namespace CMeShop.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Kosarica kosarica = db.Kosarice.Find(id);
-            db.Kosarice.Remove(kosarica);
-            db.SaveChanges();
+            var lista = (List<StavkaKosarice>)Session["StavkeKosarice"];
+            lista.Remove(lista[id]);
             return RedirectToAction("Index");
         }
 

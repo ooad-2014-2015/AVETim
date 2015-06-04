@@ -6,6 +6,7 @@
 }
 
 <h2>Izmjena korisničkih podataka</h2>
+<h4>@ViewBag.Poruka</h4>
 
 @using (Html.BeginForm())
 {
@@ -74,5 +75,8 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @if ((string)Session["role"] == "Dobavljac")
+    { @Html.ActionLink("Povratak na listu", "Index")}
+    else if ((string)Session["role"] == "Vlasnik")
+    { @Html.ActionLink("Povratak na listu", "Dobavljaci", "Korisnici")}
 </div>

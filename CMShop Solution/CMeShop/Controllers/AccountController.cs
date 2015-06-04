@@ -9,6 +9,7 @@ using System.Web.Security;
 using System.Threading;
 using System.IO;
 using System.Web.UI.WebControls;
+using System.Net;
 
 namespace CMeShop.Controllers
 {
@@ -65,38 +66,63 @@ namespace CMeShop.Controllers
             Session["role"] = userFromDb.role;
             if (userFromDb.role == "Kupac") Session["StavkeKosarice"] = new List<CMeShop.Models.StavkaKosarice>();
         }
+
+        public ActionResult Delete(int? id)
+        {
+            if ((string)Session["role"] != "Vlasnik") return View("~/Views/Shared/Error.cshtml");
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Kupac kupac = (Kupac)db.Korisnici.Find(id);
+            if (kupac == null)
+            {
+                return HttpNotFound();
+            }
+            return View(kupac);
+        }
+
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Kupac kupac = (Kupac)db.Korisnici.Find(id);
+            db.Korisnici.Remove(kupac);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+
         public ActionResult Edit(int? id)
         {
-            if (Session["id"] == null || (string)Session["role"] != "Kupac" || id != (int)Session["id"])
-                ViewBag.Poruka = "Možete izmjeniti podatke, samo kada ste prijavljeni, i to od vlastitog računa.";
+            if (!((string)Session["role"] == "Kupac" && id.Value == (int)Session["id"]) && (string)Session["role"] != "Vlasnik") return View("~/Views/Shared/Error.cshtml");
             return View((Kupac)db.Korisnici.Find(id));
         }
 
         [HttpPost]
         public ActionResult Edit(Kupac kupac)
         {
-            if (ModelState.IsValid)
-            {
-                var userFromDb = (Kupac)db.Korisnici.Find(kupac.ID);
-                userFromDb.ImeIprezime = kupac.ImeIprezime;
-                userFromDb.password = kupac.password;
-                userFromDb.userName = kupac.userName;
-                userFromDb.brojCMkartice = kupac.brojCMkartice;
-                userFromDb.bankovniRacun = kupac.bankovniRacun;
-                userFromDb.adresa = kupac.adresa;
-                userFromDb.brojTelefona = kupac.brojTelefona;
-                var kosarica = db.Kosarice.Find(kupac.KosaricaID);
-                db.Entry(kosarica).State = System.Data.Entity.EntityState.Modified;
-                db.Entry(userFromDb).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-                ViewBag.Poruka = "Uspjesno ste izmjenili korisničke podatke.";
-            }
+            var userFromDb = (Kupac)db.Korisnici.Find(kupac.ID);
+            userFromDb.ImeIprezime = kupac.ImeIprezime;
+            userFromDb.password = kupac.password;
+            userFromDb.userName = kupac.userName;
+            userFromDb.brojCMkartice = kupac.brojCMkartice;
+            userFromDb.bankovniRacun = kupac.bankovniRacun;
+            userFromDb.adresa = kupac.adresa;
+            userFromDb.brojTelefona = kupac.brojTelefona;
+            userFromDb.email = kupac.email;
+            var kosarica = db.Kosarice.Find(kupac.KosaricaID);
+            db.Entry(kosarica).State = System.Data.Entity.EntityState.Modified;
+            db.Entry(userFromDb).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            ViewBag.Poruka = "Uspjesno ste izmjenili korisničke podatke.";
             return View();
         }
         /*Koristen thread*/
         public ActionResult Details(int? id)
         {
-            if(!((string)Session["role"] == "Kupac" && id.Value != (int)Session["id"]) || (string)Session["role"] != "Vlasnik") return View("~/Views/Shared/Error.cshtml");
+            if (!((string)Session["role"] == "Kupac" && id.Value == (int)Session["id"]) && (string)Session["role"] != "Vlasnik") return View("~/Views/Shared/Error.cshtml");
             Kupac kupac = null;
             Thread mojThread = new Thread(() => prikupiDetalje(id, out kupac));
             mojThread.Start();

@@ -175,24 +175,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Artikal.cs" />
     <Compile Include="Models\Dobavljac.cs" />
     <Compile Include="Models\Dostavljac.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\IzbornikZaNarucivanje.cs" />
     <Compile Include="Models\Kosarica.cs" />
     <Compile Include="Models\Kupac.cs" />
-    <Compile Include="Models\ListaNarudzbi.cs" />
-    <Compile Include="Models\ListaZaliha.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Osoba.cs" />
-    <Compile Include="Models\PreglednikProizvoda.cs" />
-    <Compile Include="Models\StatistickiPrikaz.cs" />
     <Compile Include="Models\StavkaKosarice.cs" />
     <Compile Include="Models\Vlasnik.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\CreateUserViewModel.cs" />
     <Compile Include="ViewModels\DobavljacArtikalViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
   </ItemGroup>
@@ -232,9 +225,6 @@
     <Content Include="Views\Artikli\Edit.cshtml" />
     <Content Include="Views\Artikli\Index.cshtml" />
     <Content Include="Views\Korisnici\Create.cshtml" />
-    <Content Include="Views\Korisnici\Delete.cshtml" />
-    <Content Include="Views\Korisnici\Details.cshtml" />
-    <Content Include="Views\Korisnici\Edit.cshtml" />
     <Content Include="Views\Korisnici\Index.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -245,14 +235,12 @@
     <Content Include="Web.config" />
     <Content Include="Views\Vlasnik\Details.cshtml" />
     <Content Include="Views\Vlasnik\Edit.cshtml" />
-    <Content Include="Views\Vlasnik\Index.cshtml" />
     <Content Include="Views\Dostavljac\Delete.cshtml" />
     <Content Include="Views\Dostavljac\Details.cshtml" />
     <Content Include="Views\Dostavljac\Edit.cshtml" />
     <Content Include="Views\Dobavljac\Delete.cshtml" />
     <Content Include="Views\Dobavljac\Details.cshtml" />
     <Content Include="Views\Dobavljac\Edit.cshtml" />
-    <Content Include="Views\Kosarica\Create.cshtml" />
     <Content Include="Views\Kosarica\Delete.cshtml" />
     <Content Include="Views\Kosarica\Details.cshtml" />
     <Content Include="Views\Kosarica\Index.cshtml" />
@@ -266,6 +254,9 @@
     <Content Include="Views\Korisnici\Kupci.cshtml" />
     <Content Include="Views\Korisnici\Dostavljaci.cshtml" />
     <Content Include="Views\Korisnici\Dobavljaci.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Account\View.cshtml" />
+    <Content Include="Views\Kosarica\History.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

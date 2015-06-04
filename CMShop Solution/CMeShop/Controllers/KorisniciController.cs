@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using CMeShop.DAL;
 using CMeShop.Models;
+using CMeShop.ViewModels;
 
 namespace CMeShop.Controllers
 {
@@ -89,22 +90,32 @@ namespace CMeShop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ImeIprezime,brojTelefona,adresa,userName,password,slika")] Osoba osoba)
+        public ActionResult Create(CreateUserViewModel osoba)
         {
             if (ModelState.IsValid)
             {
                 if(osoba.role == "Kupac")
                 {
-                    var kupac = osoba as Kupac;
-                    kupac.Kosarica = new Kosarica();
-                    db.Korisnici.Add(kupac);
-                    db.SaveChanges();
+                    Kupac user = new Kupac { adresa = osoba.adresa, brojTelefona = osoba.brojTelefona, email = osoba.email, ImeIprezime = osoba.ImeIprezime, password = osoba.password, userName = osoba.userName, role = osoba.role };
+                    user.Kosarica = new Kosarica();
+                    db.Korisnici.Add(user);
+                }
+                else if(osoba.role == "Dostavljac")
+                {
+                    Dostavljac user = new Dostavljac { adresa = osoba.adresa, brojTelefona = osoba.brojTelefona, email = osoba.email, ImeIprezime = osoba.ImeIprezime, password = osoba.password, userName = osoba.userName, role = osoba.role };
+                    db.Korisnici.Add(user);
+                }
+                else if(osoba.role == "Dobavljac")
+                {
+                    Dobavljac user = new Dobavljac { adresa = osoba.adresa, brojTelefona = osoba.brojTelefona, email = osoba.email, ImeIprezime = osoba.ImeIprezime, password = osoba.password, userName = osoba.userName, role = osoba.role };
+                    db.Korisnici.Add(user);
                 }
                 else
                 {
-                    db.Korisnici.Add(osoba);
-                    db.SaveChanges();
+                    ViewBag.Poruka = "Role moze biti iskljucivo ili Kupac ili Dostavljac ili Dobavljac.";
+                    return View(osoba);
                 }
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 

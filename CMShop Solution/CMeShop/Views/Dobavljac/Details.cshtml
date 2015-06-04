@@ -8,7 +8,7 @@
 <h2>Informacije o korisničkom računu</h2>
 
 <div>
-    <h4>Dobavljac</h4>
+    <h4>Dobavljač</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -63,4 +63,8 @@
 </div>
 <p>
     @Html.ActionLink("Izmjena", "Edit", new { id = Model.ID }) |
+    @if ((string)Session["role"] == "Dobavljac")
+    { @Html.ActionLink("Povratak na listu", "Index")}
+    else if ((string)Session["role"] == "Vlasnik")
+    { @Html.ActionLink("Povratak na listu", "Dobavljaci", "Korisnici")}
 </p>
